@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 
 public class Main {
 public static void main(String[] args) {
-	JOptionPane.showMessageDialog(null, "Hola somos Tobias y Bautista");
+	usuarios();
 }
 
 public static void menu_empleado() {
