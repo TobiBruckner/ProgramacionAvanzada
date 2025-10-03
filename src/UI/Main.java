@@ -1,7 +1,13 @@
+package UI;
 import javax.swing.JOptionPane;
+
+import dll.Conexion;
+import repository.*;
+
 
 public class Main {
 public static void main(String[] args) {
+	Conexion.getInstance();
 	usuarios();
 }
 
@@ -160,7 +166,7 @@ public static void usuarios() {
 	
 int menu_usuario;	
 do {
-menu_usuario = JOptionPane.showOptionDialog(null, "bienvenido a la libreria yenny, elija que tipo de usuario es:", null, 0, 0, null, usuarios.values(), usuarios.values()[0]);
+menu_usuario = JOptionPane.showOptionDialog(null, "bienvenido a la libreria yenny, elija que tipo de usuario es:", null, 0, 0, null, usuarios_tipos.values(), usuarios_tipos.values()[0]);
 switch (menu_usuario) {
 case 0:
 	login();

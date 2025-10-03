@@ -1,3 +1,4 @@
+package repository;
 
 public enum opciones_autor {
 	
