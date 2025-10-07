@@ -1,10 +1,13 @@
+import javax.swing.JOptionPane;
+
+import repository.Validaciones;
 
 public class Empleado extends Usuario{
 	//ATRIBUTOS
 	private String sucursal;
 	//CONSTRUCTOR
-	public Empleado(String nombre, String apellido, int dNI, String mail, String contrasenia, String sucursal) {
-		super(nombre, apellido, dNI, mail, contrasenia);
+	public Empleado(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia, String sucursal) {
+		super(nombre, apellido, dNI, nombre_usuario, contrasenia);
 		this.sucursal = sucursal;
 	}
 	//GETTERS Y SETTERS
@@ -20,6 +23,11 @@ public class Empleado extends Usuario{
 	}
 	@Override
 	public void Menu() {
+		
+	}
+	@Override
+	public void Registrarse() {
+		String sucursal = Validaciones.ValidarString("Ingrese su sucursal: ");
 		
 	}
 	public void VerInformacionLibro() {

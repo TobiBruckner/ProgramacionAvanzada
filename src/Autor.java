@@ -3,17 +3,18 @@ public class Autor extends Usuario{
 	//ATRIBUTOS
 	private int idAutor;
 	private String red_social;
+	private String biografia;
 	//CONSTRUCTOR
-	
+	public Autor(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia, int idAutor,
+			String red_social, String biografia) {
+		super(nombre, apellido, dNI, nombre_usuario, contrasenia);
+		this.idAutor = idAutor;
+		this.red_social = red_social;
+		this.biografia = biografia;
+	}
 	//GETTERS Y SETTERS
 	public int getIdAutor() {
 		return idAutor;
-	}
-	public Autor(String nombre, String apellido, int dNI, String mail, String contrasenia, int idAutor,
-			String red_social) {
-		super(nombre, apellido, dNI, mail, contrasenia);
-		this.idAutor = idAutor;
-		this.red_social = red_social;
 	}
 	public void setIdAutor(int idAutor) {
 		this.idAutor = idAutor;
@@ -23,6 +24,12 @@ public class Autor extends Usuario{
 	}
 	public void setRed_social(String red_social) {
 		this.red_social = red_social;
+	}
+	public String getBiografia() {
+		return biografia;
+	}
+	public void setBiografia(String biografia) {
+		this.biografia = biografia;
 	}
 	//MÉTODOS
 	public String Login() {

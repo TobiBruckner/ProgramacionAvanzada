@@ -4,9 +4,9 @@ public class Editor extends Usuario{
 	private int idEditor;
 	private String especialidad;
 	//CONSTRUCTOR
-	public Editor(String nombre, String apellido, int dNI, String mail, String contrasenia, int idEditor,
+	public Editor(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia, int idEditor,
 			String especialidad) {
-		super(nombre, apellido, dNI, mail, contrasenia);
+		super(nombre, apellido, dNI, nombre_usuario, contrasenia);
 		this.idEditor = idEditor;
 		this.especialidad = especialidad;
 	}
