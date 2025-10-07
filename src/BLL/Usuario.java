@@ -1,10 +1,11 @@
+package BLL;
 
 public class Usuario {
 	//ATRIBUTOS
 	private String nombre;
 	private String apellido;
 	private int DNI;
-	private String mail;
+	private String nombre_usuario;
 	private String contrasenia;
 	//CONSTRUCTOR
 	public Usuario(String nombre, String apellido, int dNI, String mail, String contrasenia) {
@@ -12,7 +13,7 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		DNI = dNI;
-		this.mail = mail;
+		this.nombre_usuario = mail;
 		this.contrasenia = contrasenia;
 	}
 	//GETTERS Y SETTERS
@@ -35,10 +36,10 @@ public class Usuario {
 		DNI = dNI;
 	}
 	public String getMail() {
-		return mail;
+		return nombre_usuario;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setMail(String nombre_usuario) {
+		this.nombre_usuario = nombre_usuario;
 	}
 	public String getContrasenia() {
 		return contrasenia;

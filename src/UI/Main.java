@@ -1,8 +1,9 @@
 package UI;
 import javax.swing.JOptionPane;
 
-import dll.Conexion;
-import repository.*;
+import BLL.Autor;
+import DLL.Conexion;
+import REPOSITORY.*;
 
 
 public class Main {
@@ -119,7 +120,7 @@ public static void menu_editor() {
 	
 }
 
-public static void login() {
+public static void login_autor() {
 
 int login;	
 do {
@@ -129,28 +130,15 @@ do {
 
 
 	case 0:
-		String usuario = JOptionPane.showInputDialog("ingrese su nombre de usuario");
-		String pass = JOptionPane.showInputDialog("ingrese su contraseña");
-		
-		if (usuario.equals("empleado") && pass.equals("1234")) {
-			menu_empleado();
-			
-		}else if (usuario.equals("autor") && pass.equals("1234")) {
-			menu_autor();
-		}else if (usuario.equals("editor") && pass.equals("1234")) {
-			menu_editor();
+		Autor logueado = Autor.Login_autor();
+		if (logueado ==null) {
+			JOptionPane.showMessageDialog(null, "No se encontrò");
+		}else {
+			Autor.menu_autor();
 		}
-
-		break;
 	case 1:
-		JOptionPane.showInputDialog("ingrese su nombre completo ");
-		JOptionPane.showInputDialog("ingrese su dni");
-		JOptionPane.showInputDialog("ingrese su nombre de usuario ");
-		JOptionPane.showInputDialog("ingrese su contraseña");
-
-		break;
+		
 	case 2:
-		JOptionPane.showMessageDialog(null, "saliendo");
 		
 
 		break;
@@ -169,15 +157,15 @@ do {
 menu_usuario = JOptionPane.showOptionDialog(null, "bienvenido a la libreria yenny, elija que tipo de usuario es:", null, 0, 0, null, usuarios_tipos.values(), usuarios_tipos.values()[0]);
 switch (menu_usuario) {
 case 0:
-	login();
+	
 	break;
 
 case 1:
-	login();
+	
 	break;
 	
 case 2:
-	login();
+	login_autor();
 	break;
 }
 } while (menu_usuario!=3);	

@@ -1,3 +1,4 @@
+package BLL;
 
 public class Empleado extends Usuario{
 	//ATRIBUTOS

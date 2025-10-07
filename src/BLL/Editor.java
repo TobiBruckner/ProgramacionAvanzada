@@ -1,3 +1,4 @@
+package BLL;
 
 public class Editor extends Usuario{
 	//ATRIBUTOS

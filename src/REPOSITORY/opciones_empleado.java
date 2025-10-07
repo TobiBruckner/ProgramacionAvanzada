@@ -1,4 +1,4 @@
-package repository;
+package REPOSITORY;
 
 public enum opciones_empleado {
 	
