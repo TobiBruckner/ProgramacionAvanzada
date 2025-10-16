@@ -31,6 +31,10 @@ public class Editor extends Usuario{
 	public void Menu() {
 		
 	}
+	@Override
+	public void Registrarse() {
+		
+	}
 	public void VerPropuesta() {
 		
 	}

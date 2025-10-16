@@ -29,6 +29,8 @@ public class Empleado extends Usuario{
 	public void Registrarse() {
 		String sucursal = Validaciones.ValidarString("Ingrese su sucursal: ");
 		
+		Empleado nuevo = new Empleado(nombre,apellido,dNI,nombre_usuario,contrasenia, sucursal);
+		
 	}
 	public void VerInformacionLibro() {
 		

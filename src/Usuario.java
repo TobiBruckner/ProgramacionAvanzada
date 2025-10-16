@@ -4,17 +4,17 @@ import repository.Validaciones;
 
 public class Usuario {
 	//ATRIBUTOS
-	private String nombre;
-	private String apellido;
-	private int DNI;
-	private String nombre_usuario;
-	private String contrasenia;
+	protected String nombre;
+	protected String apellido;
+	protected int dNI;
+	protected String nombre_usuario;
+	protected String contrasenia;
 	//CONSTRUCTOR
 	public Usuario(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		DNI = dNI;
+		this.dNI = dNI;
 		this.nombre_usuario = nombre_usuario;
 		this.contrasenia = contrasenia;
 	}
@@ -33,10 +33,10 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 	public int getDNI() {
-		return DNI;
+		return dNI;
 	}
 	public void setDNI(int dNI) {
-		DNI = dNI;
+		this.dNI = dNI;
 	}
 	public String getNombre_usuario() {
 		return nombre_usuario;
