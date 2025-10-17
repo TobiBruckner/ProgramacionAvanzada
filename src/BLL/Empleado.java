@@ -1,33 +1,18 @@
 package BLL;
 
 public class Empleado extends Usuario{
-	//ATRIBUTOS
-	private String sucursal;
-	//CONSTRUCTOR
-	public Empleado(String nombre, String apellido, int dNI, String mail, String contrasenia, String sucursal) {
-		super(nombre, apellido, dNI, mail, contrasenia);
-		this.sucursal = sucursal;
-	}
-	//GETTERS Y SETTERS
-	public String getSucursal() {
-		return sucursal;
-	}
-	public void setSucursal(String sucursal) {
-		this.sucursal = sucursal;
-	}
-	//MÉTODOS
-	public String Login() {
-		return "";
-	}
-	@Override
-	public void Menu() {
-		
-	}
-	public void VerInformacionLibro() {
-		
-	}
-	public void ModificarPrecio() {
-		
-	}
+
+//constructor	
+public Empleado(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+}
+
+@Override
+public String toString() {
+	return "Empleado [getNombre()=" + getNombre() + ", getApellido()=" + getApellido() + ", getDni()=" + getDni()
+			+ ", getNombre_usuario()=" + getNombre_usuario() + ", getPass()=" + getPass() + ", toString()="
+			+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+}
+	
 	
 }
