@@ -1,3 +1,5 @@
+package BLL;
+
 import javax.swing.JOptionPane;
 
 import repository.Validaciones;
@@ -18,6 +20,7 @@ public class Empleado extends Usuario{
 		this.sucursal = sucursal;
 	}
 	//MÉTODOS
+	
 	public String Login() {
 		return "";
 	}
@@ -27,9 +30,13 @@ public class Empleado extends Usuario{
 	}
 	@Override
 	public void Registrarse() {
+		String nombre = Validaciones.ValidarString("Ingrese nombre:");
+		String apellido = Validaciones.ValidarString("Ingrese apellido:");
+		int dNI = Integer.parseInt(JOptionPane.showInputDialog("Ingrese DNI:"));
+		String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
+		String contrasenia = Validaciones.ValidarString("Ingrese contraseña:");
 		String sucursal = Validaciones.ValidarString("Ingrese su sucursal: ");
-		
-		Empleado nuevo = new Empleado(nombre,apellido,dNI,nombre_usuario,contrasenia, sucursal);
+
 		
 	}
 	public void VerInformacionLibro() {

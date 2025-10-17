@@ -1,3 +1,8 @@
+package BLL;
+
+import javax.swing.JOptionPane;
+
+import repository.Validaciones;
 
 public class Editor extends Usuario{
 	//ATRIBUTOS
@@ -24,15 +29,22 @@ public class Editor extends Usuario{
 		this.especialidad = especialidad;
 	}
 	//MÉTODOS
+	@Override
+	public void Registrarse() {
+		String nombre = Validaciones.ValidarString("Ingrese nombre:");
+		String apellido = Validaciones.ValidarString("Ingrese apellido:");
+		int dNI = Integer.parseInt(JOptionPane.showInputDialog("Ingrese DNI:"));
+		String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
+		String contrasenia = Validaciones.ValidarString("Ingrese contraseña:");
+		String especialidad = Validaciones.ValidarString("Ingrese especialidad:");
+	
+	}
+	
 	public String Login() {
 		return "";
 	}
 	@Override
 	public void Menu() {
-		
-	}
-	@Override
-	public void Registrarse() {
 		
 	}
 	public void VerPropuesta() {

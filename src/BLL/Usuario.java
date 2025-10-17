@@ -1,3 +1,4 @@
+package BLL;
 import javax.swing.JOptionPane;
 
 import repository.Validaciones;
@@ -63,8 +64,6 @@ public class Usuario {
 		int dNI = Validaciones.ValidarInt("Ingrese DNI: ");
 		String nombre_usuario = Validaciones.ValidarString("Ingrese su nombre de usuario: ");
 		String contrasenia = Validaciones.ValidarString("Ingrese su contraseña");
-		
-		Usuario nuevo = new Usuario(nombre,apellido,dNI,nombre_usuario,contrasenia);
 		
 		
 	}

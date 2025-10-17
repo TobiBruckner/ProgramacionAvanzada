@@ -1,3 +1,5 @@
+package BLL;
+
 
 public class DetalleVenta {
 	//ATRIBUTOS
