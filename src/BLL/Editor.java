@@ -2,59 +2,62 @@ package BLL;
 
 import javax.swing.JOptionPane;
 
+import dll.DTO_autor;
+import dll.DTO_editor;
 import repository.Validaciones;
 import repository.opciones_editor;
 
 public class Editor extends Usuario{
 	//ATRIBUTOS
-	private int idEditor;
-	private String especialidad;
+	private int id_editor;
 	//CONSTRUCTOR
-	public Editor(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia, int idEditor,
-			String especialidad) {
-		super(nombre, apellido, dNI, nombre_usuario, contrasenia);
-		this.idEditor = idEditor;
-		this.especialidad = especialidad;
+	
+	public Editor(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
 	}
+
+	
+
+	public Editor(int id_editor, String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+		this.id_editor = id_editor;
+	}
+
 	//GETTERS Y SETTERS
-	public int getIdEditor() {
-		return idEditor;
+	public int getId_editor() {
+		return id_editor;
 	}
-	public void setIdEditor(int idEditor) {
-		this.idEditor = idEditor;
-	}
-	public String getEspecialidad() {
-		return especialidad;
-	}
-	public void setEspecialidad(String especialidad) {
-		this.especialidad = especialidad;
+	public void setId_editor(int id_editor) {
+		this.id_editor = id_editor;
 	}
 	//MÉTODOS
-	@Override
-	public void Registrarse() {
-		String nombre = Validaciones.ValidarString("Ingrese nombre:");
-		String apellido = Validaciones.ValidarString("Ingrese apellido:");
-		int dNI = Integer.parseInt(JOptionPane.showInputDialog("Ingrese DNI:"));
-		String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
-		String contrasenia = Validaciones.ValidarString("Ingrese contraseña:");
-		String especialidad = Validaciones.ValidarString("Ingrese especialidad:");
-		
-		if (dll.DTO_editor.verificar_editor_existente(nombre_usuario)) {
-			JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe. Por favor, elija otro.");
-			return;
-		}
-	
-		boolean registrado = dll.DTO_editor.registrar_editor(nombre, apellido, dNI, nombre_usuario, contrasenia, especialidad);
-		
-		if (registrado) {
-			JOptionPane.showMessageDialog(null, "Editor registrado exitosamente.");
-		} else {
-			JOptionPane.showMessageDialog(null, "Error al registrar el editor.");
+	public static Editor Login_editor() {
+		String nombre_usuario;
+		String pass;
+
+		nombre_usuario = JOptionPane.showInputDialog("ingrese su nombre_usuario");
+		pass = JOptionPane.showInputDialog("ingrese su contraseña");
+
+		if (nombre_usuario.isEmpty() || pass.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Error al ingresar datos");
+			return null;
+		}else {
+
+			return DTO_editor.login_dto(nombre_usuario, pass);
+
 		}
 	}
 	
-	public String Login() {
-		return "";
+	public static boolean AgregarEditor() {
+		String nombre = Validaciones.ValidarString("Ingrese nombre:");
+		String apellido = Validaciones.ValidarString("Ingrese apellido:");
+		String dni = Validaciones.ValidarString("Ingrese DNI:");
+		String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
+		String pass = Validaciones.ValidarString("Ingrese contraseña:");
+		
+		Editor nuevo = new Editor(nombre,apellido,dni,nombre_usuario,pass);
+		
+		return DTO_editor.agregarEditor(nuevo);
 	}
 
 	public void VerPropuesta() {
@@ -63,5 +66,12 @@ public class Editor extends Usuario{
 	public void EstimacionGanancia() {
 		
 	}
+
+@Override
+public String toString() {
+	return "Editor [getNombre()=" + getNombre() + ", getApellido()=" + getApellido() + ", getDni()=" + getDni()
+			+ ", getNombre_usuario()=" + getNombre_usuario() + ", getPass()=" + getPass() + ", toString()="
+			+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+}
 	
 }

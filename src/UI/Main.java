@@ -1,8 +1,15 @@
 package UI;
 import javax.swing.JOptionPane;
 
+import BLL.Autor;
+import BLL.Editor;
+import BLL.Empleado;
 import dll.Conexion;
-import repository.*;
+import repository.login_usuarios;
+import repository.usuarios_tipos;
+import repository.opciones_autor;
+import repository.opciones_editor;
+import repository.opciones_empleado;
 
 
 public class Main {
@@ -119,7 +126,7 @@ public static void menu_editor() {
 	
 }
 
-public static void login() {
+public static void login(usuarios_tipos tipo) {
 
 int login;	
 do {
@@ -143,10 +150,25 @@ do {
 
 		break;
 	case 1:
-		JOptionPane.showInputDialog("ingrese su nombre completo ");
-		JOptionPane.showInputDialog("ingrese su dni");
-		JOptionPane.showInputDialog("ingrese su nombre de usuario ");
-		JOptionPane.showInputDialog("ingrese su contraseña");
+		boolean agregado = false;
+		switch (tipo) {
+			case empleado:
+				agregado = Empleado.AgregarEmpleado();
+				menu_empleado();
+				break;
+			case editor:
+				agregado = Editor.AgregarEditor();
+				menu_editor();
+				break;
+			case autor:
+				agregado = Autor.AgregarAutor();
+				menu_autor();
+				break;
+			default:
+				JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");
+				break;
+		}
+		JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
 
 		break;
 	case 2:
@@ -169,16 +191,19 @@ do {
 menu_usuario = JOptionPane.showOptionDialog(null, "bienvenido a la libreria yenny, elija que tipo de usuario es:", null, 0, 0, null, usuarios_tipos.values(), usuarios_tipos.values()[0]);
 switch (menu_usuario) {
 case 0:
-	login();
+	login(usuarios_tipos.empleado);
 	break;
 
 case 1:
-	login();
+	login(usuarios_tipos.editor);
 	break;
 	
 case 2:
-	login();
+	login(usuarios_tipos.autor);
 	break;
+	
+case 3:
+	JOptionPane.showMessageDialog(null, "Salir");
 }
 } while (menu_usuario!=3);	
 

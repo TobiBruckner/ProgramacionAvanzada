@@ -1,56 +1,69 @@
 package BLL;
-import javax.swing.JOptionPane;
-
-import repository.Validaciones;
 
 public class Usuario {
-	//ATRIBUTOS
-	protected String nombre;
-	protected String apellido;
-	protected int dNI;
-	protected String nombre_usuario;
-	protected String contrasenia;
-	//CONSTRUCTOR
-	public Usuario(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia) {
+	//atributos	
+	private String nombre;
+	private String apellido;
+	private String dni;
+	private String nombre_usuario;
+	private String pass;
+
+	//constructor
+	public Usuario(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.dNI = dNI;
+		this.dni = dni;
 		this.nombre_usuario = nombre_usuario;
-		this.contrasenia = contrasenia;
+		this.pass = pass;
 	}
-	
-	//GETTERS Y SETTERS
+
+	public Usuario(String nombre_usuario, String pass) {
+		this.nombre_usuario = nombre_usuario;
+		this.pass = pass;
+	}
+
+	//getters y setters
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido() {
 		return apellido;
 	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public int getDNI() {
-		return dNI;
+
+	public String getDni() {
+		return dni;
 	}
-	public void setDNI(int dNI) {
-		this.dNI = dNI;
+
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
+
 	public String getNombre_usuario() {
 		return nombre_usuario;
 	}
+
 	public void setNombre_usuario(String nombre_usuario) {
 		this.nombre_usuario = nombre_usuario;
 	}
-	public String getContrasenia() {
-		return contrasenia;
+
+	public String getPass() {
+		return pass;
 	}
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
+
 	//MÉTODOS
 	public String Login() {
 		return "";
@@ -58,13 +71,9 @@ public class Usuario {
 	public void Menu() {
 		
 	}
-	public void Registrarse() {
-		String nombre = Validaciones.ValidarString("Ingrese nombre: ");
-		String apellido = Validaciones.ValidarString("Ingrese apellido: ");
-		int dNI = Validaciones.ValidarInt("Ingrese DNI: ");
-		String nombre_usuario = Validaciones.ValidarString("Ingrese su nombre de usuario: ");
-		String contrasenia = Validaciones.ValidarString("Ingrese su contraseña");
-		
-		
+	@Override
+	public String toString() {
+		return "Usuario [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", nombre_usuario="
+				+ nombre_usuario + ", pass=" + pass + "]";
 	}
 }

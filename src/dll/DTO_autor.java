@@ -1,71 +1,78 @@
 package dll;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import BLL.Autor;
+import dll.Conexion;
+import repository.Encriptador;
 
 public class DTO_autor {
- 
-    public static boolean registrar_autor(String nombre, String apellido, int dni, 
-            String nombre_usuario, String contrasenia, String red_social, String biografia) {
-        
-        boolean registro = false;
-        
+
+	private static Connection con = Conexion.getInstance().getConnection();	
+	
+	public static Autor login_dto(String nombre_usuario, String pass) {	
+    	Autor autor = null;
         try {
-            Connection con = Conexion.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO autor (nombre, apellido, dni, nombre_usuario, contrasenia, red_social, biografia) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, nombre);
-            ps.setString(2, apellido);
-            ps.setInt(3, dni);
-            ps.setString(4, nombre_usuario);
-            ps.setString(5, contrasenia);
-            ps.setString(6, red_social);
-            ps.setString(7, biografia);
-            
-            int res = ps.executeUpdate();
-            if (res > 0) {
-                registro = true;
-            }
-            
-            ps.close();
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar autor: " + e.getMessage());
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM autor WHERE nombre_usuario = ? AND pass = ?"
+            );
+            stmt.setString(1, nombre_usuario);
+            stmt.setString(2, Encriptador.encriptar(pass));
+            //executequery se utiliza cuando no hay cambios en la bdd
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int id_autor = rs.getInt("id_autor");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String dni = rs.getString("dni");
+                String biografia = rs.getString("biografia");
+                String redes_sociales = rs.getString("redes_sociales");
+
+                 autor = new Autor(id_autor,nombre,apellido,dni,nombre_usuario,pass);
+                }
+       
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        return registro;
+        return autor;
     }
-    
-    public static boolean verificar_autor_existente(String nombre_usuario) {
-        boolean existe = false;
-        
+	
+	public static boolean agregarAutor(Autor autor) {
+	
         try {
-            Connection con = Conexion.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(
-                    "SELECT COUNT(*) FROM autor WHERE nombre_usuario = ?");
-            ps.setString(1, nombre_usuario);
+            PreparedStatement statement = con.prepareStatement(
+                "INSERT INTO autor (nombre, apellido, dni, nombre_usuario, pass, biografia, redes_sociales) VALUES (?, ?, ?, ?, ?, ?, ?)"
+            );
+            statement.setString(1, autor.getNombre());
+            statement.setString(2, autor.getApellido());
+            statement.setString(3, autor.getDni());
+            statement.setString(4, autor.getNombre_usuario());
+            statement.setString(5, Encriptador.encriptar(autor.getPass()));
+            statement.setString(6, autor.getBiografia());
+            statement.setString(7, autor.getRedes_sociales());
             
-            ResultSet rs = ps.executeQuery();
-            if (rs.next() && rs.getInt(1) > 0) {
-                existe = true;
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Autor agregado correctamente.");
+                return true;
             }
-            
-            rs.close();
-            ps.close();
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al verificar autor: " + e.getMessage());
+        } catch (MySQLIntegrityConstraintViolationException e) {
+           	JOptionPane.showMessageDialog(null, "Autor con nombre de usuario ya creado");
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+
         }
-        
-        return existe;
+        return false;
     }
+	
 }

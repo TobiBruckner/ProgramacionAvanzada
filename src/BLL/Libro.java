@@ -2,38 +2,47 @@ package BLL;
 
 public class Libro {
 	//ATRIBUTOS
-	private int idLibro;
-	private String nombre;
-	private double precio;
+	private int id_libro;
+	private String nombre_libro;
+	private String autor_libro;
+	private String precio_libro;
 	private int stock;
-	private String genero;
+	private String popularidad;
 	//CONSTRUCTOR
-	public Libro(int idLibro, String nombre, double precio, int stock, String genero) {
+	public Libro(int id_libro, String nombre_libro, String autor_libro, String precio_libro, int stock,
+			String popularidad) {
 		super();
-		this.idLibro = idLibro;
-		this.nombre = nombre;
-		this.precio = precio;
+		this.id_libro = id_libro;
+		this.nombre_libro = nombre_libro;
+		this.autor_libro = autor_libro;
+		this.precio_libro = precio_libro;
 		this.stock = stock;
-		this.genero = genero;
+		this.popularidad = popularidad;
 	}
 	//GETTERS Y SETTERS
-	public int getIdLibro() {
-		return idLibro;
+	public int getId_libro() {
+		return id_libro;
 	}
-	public void setIdLibro(int idLibro) {
-		this.idLibro = idLibro;
+	public void setId_libro(int id_libro) {
+		this.id_libro = id_libro;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombre_libro() {
+		return nombre_libro;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre_libro(String nombre_libro) {
+		this.nombre_libro = nombre_libro;
 	}
-	public double getPrecio() {
-		return precio;
+	public String getAutor_libro() {
+		return autor_libro;
 	}
-	public void setPrecio(double precio) {
-		this.precio = precio;
+	public void setAutor_libro(String autor_libro) {
+		this.autor_libro = autor_libro;
+	}
+	public String getPrecio_libro() {
+		return precio_libro;
+	}
+	public void setPrecio_libro(String precio_libro) {
+		this.precio_libro = precio_libro;
 	}
 	public int getStock() {
 		return stock;
@@ -41,11 +50,12 @@ public class Libro {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public String getGenero() {
-		return genero;
+	public String getPopularidad() {
+		return popularidad;
 	}
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setPopularidad(String popularidad) {
+		this.popularidad = popularidad;
 	}
+	
 	
 }

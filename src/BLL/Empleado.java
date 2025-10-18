@@ -1,56 +1,85 @@
 package BLL;
 
+import java.sql.PreparedStatement;
+
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
+import dll.DTO_editor;
+import dll.DTO_empleado;
+import repository.Encriptador;
 import repository.Validaciones;
 import repository.opciones_empleado;
 
 public class Empleado extends Usuario{
 	//ATRIBUTOS
-	private String sucursal;
+	private int id_empleado;
 	//CONSTRUCTOR
-	public Empleado(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia, String sucursal) {
-		super(nombre, apellido, dNI, nombre_usuario, contrasenia);
-		this.sucursal = sucursal;
+	public Empleado(String nombre, String apellido, String dni, String nombre_usuario, String pass,
+			int id_empleado) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+		
 	}
+	
+	public Empleado(int id_empleado, String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+		this.id_empleado = id_empleado;
+	}
+
+	public Empleado(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+	}
+
 	//GETTERS Y SETTERS
-	public String getSucursal() {
-		return sucursal;
+	public int getId_empleado() {
+		return id_empleado;
 	}
-	public void setSucursal(String sucursal) {
-		this.sucursal = sucursal;
+
+	public void setId_empleado(int id_empleado) {
+		this.id_empleado = id_empleado;
 	}
 	//MÉTODOS
-	
-	public String Login() {
-		return "";
+	public static Empleado Login_empleado() {
+		String nombre_usuario;
+		String pass;
+
+		nombre_usuario = JOptionPane.showInputDialog("ingrese su nombre_usuario");
+		pass = JOptionPane.showInputDialog("ingrese su contraseña");
+
+		if (nombre_usuario.isEmpty() || pass.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Error al ingresar datos");
+			return null;
+		}else {
+
+			return DTO_empleado.login_dto(nombre_usuario, pass);
+
+		}
 	}
-	@Override
-	public void Registrarse() {
+	
+	public static boolean AgregarEmpleado() {
 		String nombre = Validaciones.ValidarString("Ingrese nombre:");
 		String apellido = Validaciones.ValidarString("Ingrese apellido:");
-		int dNI = Integer.parseInt(JOptionPane.showInputDialog("Ingrese DNI:"));
+		String dni = Validaciones.ValidarString("Ingrese DNI:");
 		String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
-		String contrasenia = Validaciones.ValidarString("Ingrese contraseña:");
-		String sucursal = Validaciones.ValidarString("Ingrese su sucursal: ");
-
-		if (dll.DTO_empleado.verificar_empleado_existente(nombre_usuario)) {
-			JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe. Por favor, elija otro.");
-			return;
-		}
-		boolean registrado = dll.DTO_empleado.registrar_empleado(nombre, apellido, dNI, nombre_usuario, contrasenia, sucursal);
+		String pass = Validaciones.ValidarString("Ingrese contraseña:");
 		
-		if (registrado) {
-			JOptionPane.showMessageDialog(null, "Empleado registrado exitosamente.");
-		} else {
-			JOptionPane.showMessageDialog(null, "Error al registrar el empleado.");
-		}
+		Empleado nuevo = new Empleado(nombre,apellido,dni,nombre_usuario,pass);
+		
+		return DTO_empleado.agregarEmpleado(nuevo);
 	}
+
 	public void VerInformacionLibro() {
 		
 	}
 	public void ModificarPrecio() {
 		
+	}
+	@Override
+	public String toString() {
+		return "Empleado [getNombre()=" + getNombre() + ", getApellido()=" + getApellido() + ", getDni()=" + getDni()
+				+ ", getNombre_usuario()=" + getNombre_usuario() + ", getPass()=" + getPass() + ", toString()="
+				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 	
 }
