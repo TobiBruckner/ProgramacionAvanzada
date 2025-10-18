@@ -3,6 +3,7 @@ package BLL;
 import javax.swing.JOptionPane;
 
 import repository.Validaciones;
+import repository.opciones_autor;
 
 public class Autor extends Usuario{
 	//ATRIBUTOS
@@ -17,6 +18,12 @@ public class Autor extends Usuario{
 		this.red_social = red_social;
 		this.biografia = biografia;
 	}
+	
+	public Autor(String nombre, String apellido, int dNI, String nombre_usuario, String contrasenia, int idAutor) {
+		super(nombre, apellido, dNI, nombre_usuario, contrasenia);
+		this.idAutor = idAutor;
+	}
+
 	//GETTERS Y SETTERS
 	public int getIdAutor() {
 		return idAutor;
@@ -47,14 +54,22 @@ public class Autor extends Usuario{
 		String red_social = Validaciones.ValidarString("Ingrese red social:");
 		String biografia = Validaciones.ValidarString("Ingrese biografía:");
 	
+		if (dll.DTO_autor.verificar_autor_existente(nombre_usuario)) {
+			JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe. Por favor, elija otro.");
+			return;
+		}
+		
+		boolean registrado = dll.DTO_autor.registrar_autor(nombre, apellido, dNI, nombre_usuario, contrasenia, red_social, biografia);
+		
+		if (registrado) {
+			JOptionPane.showMessageDialog(null, "Autor registrado exitosamente.");
+		} else {
+			JOptionPane.showMessageDialog(null, "Error al registrar el autor.");
+		}
 	}
 	
 	public String Login() {
 		return "";
-		
-	}
-	@Override
-	public void Menu() {
 		
 	}
 	public void CargarInfo() {

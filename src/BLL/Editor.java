@@ -3,6 +3,7 @@ package BLL;
 import javax.swing.JOptionPane;
 
 import repository.Validaciones;
+import repository.opciones_editor;
 
 public class Editor extends Usuario{
 	//ATRIBUTOS
@@ -37,16 +38,25 @@ public class Editor extends Usuario{
 		String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
 		String contrasenia = Validaciones.ValidarString("Ingrese contraseña:");
 		String especialidad = Validaciones.ValidarString("Ingrese especialidad:");
+		
+		if (dll.DTO_editor.verificar_editor_existente(nombre_usuario)) {
+			JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe. Por favor, elija otro.");
+			return;
+		}
 	
+		boolean registrado = dll.DTO_editor.registrar_editor(nombre, apellido, dNI, nombre_usuario, contrasenia, especialidad);
+		
+		if (registrado) {
+			JOptionPane.showMessageDialog(null, "Editor registrado exitosamente.");
+		} else {
+			JOptionPane.showMessageDialog(null, "Error al registrar el editor.");
+		}
 	}
 	
 	public String Login() {
 		return "";
 	}
-	@Override
-	public void Menu() {
-		
-	}
+
 	public void VerPropuesta() {
 		
 	}

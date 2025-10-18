@@ -3,6 +3,7 @@ package dll;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -11,18 +12,15 @@ import com.mysql.jdbc.Connection;
 import BLL.Empleado;
 
 public class DTO_empleado {
- 
     public static boolean registrar_empleado(String nombre, String apellido, int dni, 
             String nombre_usuario, String contrasenia, String sucursal) {
         
         boolean registro = false;
         
         try {
-      
             int id_usuario = DTO_usuario.registrar_usuario(nombre, apellido, dni, nombre_usuario, contrasenia, 3);
             
             if (id_usuario > 0) {
-       
                 Connection con = Conexion.getInstance().getConnection();
                 PreparedStatement ps = con.prepareStatement(
                         "INSERT INTO empleado (id_usuario, sucursal) VALUES (?, ?)");
