@@ -154,15 +154,12 @@ do {
 		switch (tipo) {
 			case empleado:
 				agregado = Empleado.AgregarEmpleado();
-				menu_empleado();
 				break;
 			case editor:
 				agregado = Editor.AgregarEditor();
-				menu_editor();
 				break;
 			case autor:
 				agregado = Autor.AgregarAutor();
-				menu_autor();
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");
