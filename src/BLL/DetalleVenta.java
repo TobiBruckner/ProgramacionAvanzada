@@ -30,24 +30,25 @@ public class DetalleVenta {
 		
 	}
 	//GETTERS Y SETTERS
+	
+	
+	
 
 
 
-	public int getId_detalle_venta() {
-		return id_detalle_venta;
-	}
-
-
-
-	public int getId_detalle_venta() {
-		return id_detalle_venta;
-	}
+	
 	public void setIdVenta(int idVenta) {
 		this.idVenta = idVenta;
 	}
 
 
 
+	public int getIdVenta() {
+		return idVenta;
+	}
+	public int getId_detalle_venta() {
+		return id_detalle_venta;
+	}
 	public void setId_detalle_venta(int id_detalle_venta) {
 		this.id_detalle_venta = id_detalle_venta;
 	}
