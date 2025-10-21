@@ -1,0 +1,31 @@
+package repository;
+
+public interface Encriptador {
+	 static String encriptar(String texto) {
+	        StringBuilder resultado = new StringBuilder();
+	        for (char c : texto.toCharArray()) {
+	            if (Character.isLetter(c)) {
+	                char base = Character.isLowerCase(c) ? 'a' : 'A';
+	                c = (char) ((c - base + 3) % 26 + base);
+	            } else if (Character.isDigit(c)) {
+	                c = (char) ((c - '0' + 3) % 10 + '0');
+	            }
+	            resultado.append(c);
+	        }
+	        return resultado.toString();
+	    }
+
+	    static String desencriptar(String texto) {
+	        StringBuilder resultado = new StringBuilder();
+	        for (char c : texto.toCharArray()) {
+	            if (Character.isLetter(c)) {
+	                char base = Character.isLowerCase(c) ? 'a' : 'A';
+	                c = (char) ((c - base - 3 + 26) % 26 + base);
+	            } else if (Character.isDigit(c)) {
+	                c = (char) ((c - '0' - 3 + 10) % 10 + '0');
+	            }
+	            resultado.append(c);
+	        }
+	        return resultado.toString();
+	    }
+}

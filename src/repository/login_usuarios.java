@@ -1,4 +1,4 @@
-package REPOSITORY;
+package repository;
 
 public enum login_usuarios {
 	

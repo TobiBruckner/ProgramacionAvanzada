@@ -2,6 +2,8 @@ package BLL;
 
 public class DetalleVenta {
 	//ATRIBUTOS
+	private int idVenta;
+	private int cantidad;
 	private int id_detalle_venta;
 	private int cantidad_vendida;
 	private int idLibro;
@@ -21,6 +23,8 @@ public class DetalleVenta {
 	}
 	public DetalleVenta(int cantidad_vendida, int idLibro) {
 		super();
+		this.idVenta = idVenta;
+		this.cantidad = cantidad;
 		this.cantidad_vendida = cantidad_vendida;
 		this.idLibro = idLibro;
 		
@@ -35,14 +39,29 @@ public class DetalleVenta {
 
 
 
+	public int getId_detalle_venta() {
+		return id_detalle_venta;
+	}
+	public void setIdVenta(int idVenta) {
+		this.idVenta = idVenta;
+	}
+
+
+
 	public void setId_detalle_venta(int id_detalle_venta) {
 		this.id_detalle_venta = id_detalle_venta;
+	}
+	public int getCantidad() {
+		return cantidad;
 	}
 
 
 
 	public int getCantidad_vendida() {
 		return cantidad_vendida;
+	}
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 
@@ -86,7 +105,7 @@ public class DetalleVenta {
 	public void setFk_libro(int fk_libro) {
 		this.fk_libro = fk_libro;
 	}
-	
+
 	
 
 }
