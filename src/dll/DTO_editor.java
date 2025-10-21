@@ -47,13 +47,13 @@ private static Connection con = Conexion.getInstance().getConnection();
 	
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO editor (nombre, apellido, dni, nombre_usuario, pass) VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO editor (nombre, apellido, dni, pass, nombre_usuario) VALUES (?, ?, ?, ?, ?)"
             );
             statement.setString(1, editor.getNombre());
             statement.setString(2, editor.getApellido());
             statement.setString(3, editor.getDni());
-            statement.setString(4, editor.getNombre_usuario());
-            statement.setString(5, Encriptador.encriptar(editor.getPass()));
+            statement.setString(4, Encriptador.encriptar(editor.getPass()));
+            statement.setString(5, editor.getNombre_usuario());
             
 
 

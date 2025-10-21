@@ -45,13 +45,13 @@ private static Connection con = Conexion.getInstance().getConnection();
 	
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO empleado (nombre, apellido, dni, nombre_usuario, pass) VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO empleado (nombre, apellido, dni, pass, nombre_usuario) VALUES (?, ?, ?, ?, ?)"
             );
             statement.setString(1, empleado.getNombre());
             statement.setString(2, empleado.getApellido());
             statement.setString(3, empleado.getDni());
-            statement.setString(4, empleado.getNombre_usuario());
-            statement.setString(5, Encriptador.encriptar(empleado.getPass()));
+            statement.setString(4, Encriptador.encriptar(empleado.getPass()));
+            statement.setString(5, empleado.getNombre_usuario());
             
             int filas = statement.executeUpdate();
             if (filas > 0) {
