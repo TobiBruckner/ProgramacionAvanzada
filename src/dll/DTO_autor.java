@@ -48,7 +48,7 @@ public class DTO_autor {
 	
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO autor (nombre, apellido, dni, nombre_usuario, pass, biografia, redes_sociales) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO autor (nombre, apellido, dni, pass, biografia, redes_sociales, nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)"
             );
             statement.setString(1, autor.getNombre());
             statement.setString(2, autor.getApellido());

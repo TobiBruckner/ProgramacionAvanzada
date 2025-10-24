@@ -4,7 +4,9 @@ import javax.swing.JOptionPane;
 import BLL.Autor;
 import BLL.Editor;
 import BLL.Empleado;
+import BLL.Usuario;
 import dll.Conexion;
+import dll.DTO_empleado;
 import repository.login_usuarios;
 import repository.usuarios_tipos;
 import repository.opciones_autor;
@@ -136,17 +138,7 @@ do {
 
 
 	case 0:
-		String usuario = JOptionPane.showInputDialog("ingrese su nombre de usuario");
-		String pass = JOptionPane.showInputDialog("ingrese su contraseña");
 		
-		if (usuario.equals("empleado") && pass.equals("1234")) {
-			menu_empleado();
-			
-		}else if (usuario.equals("autor") && pass.equals("1234")) {
-			menu_autor();
-		}else if (usuario.equals("editor") && pass.equals("1234")) {
-			menu_editor();
-		}
 
 		break;
 	case 1:
