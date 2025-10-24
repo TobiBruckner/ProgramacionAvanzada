@@ -31,21 +31,21 @@ public static void menu_empleado() {
 	int menu_empleado;
 	
 	do {
-		menu_empleado = JOptionPane.showOptionDialog(null,"menu empleado",""
+		menu_empleado = JOptionPane.showOptionDialog(null,"Menú empleado","¿Qué desea realizar?"
 				,0,0,null,
 				opciones_empleado.values(),opciones_empleado.values()[0]);
 		switch (menu_empleado) {
 		case 0:
-			JOptionPane.showMessageDialog(null, "ver informacion de libro");
+			JOptionPane.showMessageDialog(null, "Ver información de libro");
 
 			break;
 			
         case 1:
-			JOptionPane.showInputDialog("cambiar precio de libro");
+			JOptionPane.showInputDialog("Cambiar precio de libro");
 			break;
 			
         case 2:
-	JOptionPane.showMessageDialog(null, "salir");
+	JOptionPane.showMessageDialog(null, "Salir");
 	break;
 
 		
@@ -64,26 +64,26 @@ public static void menu_autor() {
 	int menu_autor;
 	
 	do {
-		menu_autor = JOptionPane.showOptionDialog(null,"menu autor",""
+		menu_autor = JOptionPane.showOptionDialog(null,"Menú autor","¿Qué desea realizar?"
 				,0,0,null,
 				opciones_autor.values(),opciones_autor.values()[0]);
 		
 		switch (menu_autor) {
 		case 0:
-			JOptionPane.showInputDialog("enviar propuesta");
+			JOptionPane.showInputDialog("Enviar propuesta");
 			break;
         case 1:
-			JOptionPane.showInputDialog("cargar informacion");
+			JOptionPane.showInputDialog("Cargar informacion");
 
 			break;
 
         case 2:
         	
-            JOptionPane.showMessageDialog(null, "ver estado de propuesta");
+            JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
 	
 	         break;
         case 3:
-        	JOptionPane.showMessageDialog(null, "saliendo");
+        	JOptionPane.showMessageDialog(null, "Saliendo");
 	
               break;
 
@@ -104,21 +104,21 @@ public static void menu_editor() {
 	int menu_editor;
 	
 	do {
-		menu_editor = JOptionPane.showOptionDialog(null,"",""
+		menu_editor = JOptionPane.showOptionDialog(null,"Menú editor","¿Qué desea realizar?"
 				,0,0,null,
 				opciones_editor.values(),opciones_editor.values()[0]);
 		
 		switch (menu_editor) {
 		case 0:
-			JOptionPane.showMessageDialog(null, "ver_propuestas");
+			JOptionPane.showMessageDialog(null, "Ver propuestas");
 			break;
 
         case 1:
-        	JOptionPane.showInputDialog("proyectar estimacion de ganancia");
+        	JOptionPane.showInputDialog("Proyectar estimacion de ganancia");
 
 			break;
         case 2:
-        	JOptionPane.showMessageDialog(null, "saliendo");
+        	JOptionPane.showMessageDialog(null, "Saliendo");
 
 	
 	         break;
@@ -133,12 +133,43 @@ public static void login(usuarios_tipos tipo) {
 int login;	
 do {
 
-	login = JOptionPane.showOptionDialog(null, "que desea realizar", "", 0, 0, null, login_usuarios.values(), login_usuarios.values()[0]);	
+	login = JOptionPane.showOptionDialog(null, "¿Qué operación desea realizar?", "", 0, 0, null, login_usuarios.values(), login_usuarios.values()[0]);	
 	switch (login) {
 
 
 	case 0:
-		
+		switch (tipo) {
+			case empleado:
+				Empleado empleado = Empleado.Login_empleado();
+				if(empleado != null) {
+					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+					menu_empleado();
+				}else {
+					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
+				}
+				break;
+			case editor:
+				Editor editor = Editor.Login_editor();
+				if(editor != null) {
+					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+					menu_empleado();
+				}else {
+					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
+				}
+				break;
+			case autor:
+				Autor autor = Autor.Login_autor();
+				if(autor != null) {
+					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+					menu_empleado();
+				}else {
+					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
+				}
+				break;
+			default:
+				JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");
+				break;
+		}
 
 		break;
 	case 1:
@@ -146,22 +177,28 @@ do {
 		switch (tipo) {
 			case empleado:
 				agregado = Empleado.AgregarEmpleado();
+				JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
+				menu_empleado();
 				break;
 			case editor:
 				agregado = Editor.AgregarEditor();
+				JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
+				menu_editor();
 				break;
 			case autor:
 				agregado = Autor.AgregarAutor();
+				JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
+				menu_autor();
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");
 				break;
 		}
-		JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
+		
 
 		break;
 	case 2:
-		JOptionPane.showMessageDialog(null, "saliendo");
+		JOptionPane.showMessageDialog(null, "Saliendo");
 		
 
 		break;
@@ -177,7 +214,7 @@ public static void usuarios() {
 	
 int menu_usuario;	
 do {
-menu_usuario = JOptionPane.showOptionDialog(null, "bienvenido a la libreria yenny, elija que tipo de usuario es:", null, 0, 0, null, usuarios_tipos.values(), usuarios_tipos.values()[0]);
+menu_usuario = JOptionPane.showOptionDialog(null, "Bienvenido a la librería Yenny, elija que tipo de usuario es:", null, 0, 0, null, usuarios_tipos.values(), usuarios_tipos.values()[0]);
 switch (menu_usuario) {
 case 0:
 	login(usuarios_tipos.empleado);
