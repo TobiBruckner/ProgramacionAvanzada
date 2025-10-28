@@ -44,8 +44,8 @@ public class Empleado extends Usuario{
 		String nombre_usuario;
 		String pass;
 
-		nombre_usuario = JOptionPane.showInputDialog("ingrese su nombre_usuario");
-		pass = JOptionPane.showInputDialog("ingrese su contraseña");
+		nombre_usuario = JOptionPane.showInputDialog("Ingrese su nombre de usuario: ");
+		pass = JOptionPane.showInputDialog("Ingrese su contraseña: ");
 
 		if (nombre_usuario.isEmpty() || pass.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Error al ingresar datos");
