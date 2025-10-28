@@ -54,7 +54,7 @@ public static void menu_empleado() {
 }
 
 
-public static void menu_editor() {
+public static void menu_editor(Editor editor) {
 	
 	
 	//opciones_empleado elegido = (opciones_empleado)JOptionPane.showInputDialog(null,"",""
@@ -76,8 +76,7 @@ public static void menu_editor() {
 			break;
 
         case 1:
-        	JOptionPane.showInputDialog("Proyectar estimacion de ganancia");
-
+        	Editor.EstimacionGanancia(editor.getId_editor());
 			break;
         case 2:
         	JOptionPane.showMessageDialog(null, "Saliendo");
@@ -114,20 +113,20 @@ do {
 				Editor editor = Editor.Login_editor();
 				if(editor != null) {
 					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-					menu_editor();
+					menu_editor(editor);
 				}else {
 					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
 				}
 				break;
-			case autor:
-				Autor autor = Autor.Login_autor();
-				if(autor != null) {
-					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-					Autor.menu_autor();
-				}else {
-					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
-				}
-				break;
+            case autor:
+                Autor autor = Autor.Login_autor();
+                if(autor != null) {
+                    JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+                    Autor.menu_autor(autor);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
+                }
+                break;
 			default:
 				JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");
 				break;

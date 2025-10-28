@@ -26,7 +26,7 @@ public class DTO_autor {
             );
             stmt.setString(1, nombre_usuario);
             stmt.setString(2, Encriptador.encriptar(pass));
-            //executequery se utiliza cuando no hay cambios en la bdd
+            
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

@@ -20,7 +20,7 @@ public class DTO_propuesta {
 	private static Connection con = Conexion.getInstance().getConnection();	
 	
 	
-//agregar_propuesta	
+
 	public static boolean agregar_propuesta(Propuesta propuesta) {
 		
         try {

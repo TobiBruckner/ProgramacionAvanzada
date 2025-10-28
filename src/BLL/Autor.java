@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 import dll.DTO_autor;
 import dll.DTO_propuesta;
 import repository.Validaciones;
+import java.util.List;
+import dll.DTO_estado_propuesta;
 import repository.opciones_autor;
 
 public class Autor extends Usuario{
@@ -38,9 +40,15 @@ public class Autor extends Usuario{
 	
 
 	//getters y setters
-	public String getBiografia() {
-		return biografia;
-	}
+    public int getId_autor() {
+        return id_autor;
+    }
+    public void setId_autor(int id_autor) {
+        this.id_autor = id_autor;
+    }
+    public String getBiografia() {
+        return biografia;
+    }
 
 	public void setBiografia(String biografia) {
 		this.biografia = biografia;
@@ -100,7 +108,7 @@ public class Autor extends Usuario{
 		}
 		
 	
-		public static void menu_autor() {
+    public static void menu_autor(Autor autor) {
 			
 			
 			//opciones_empleado elegido = (opciones_empleado)JOptionPane.showInputDialog(null,"",""
@@ -115,13 +123,13 @@ public class Autor extends Usuario{
 						,0,0,null,
 						opciones_autor.values(),opciones_autor.values()[0]);
 				
-				switch (menu_autor) {
-				case 0:
-					Autor.AgregarPropuesta();
-		        case 1:
-		        	JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
+                switch (menu_autor) {
+                case 0:
+                    Autor.AgregarPropuesta();
+                case 1:
+                    Autor.VerEstadoPropuesta(autor.getId_autor());
 
-					break;
+                    break;
 
 		        case 2:
 		        	JOptionPane.showMessageDialog(null, "Saliendo");
@@ -134,9 +142,18 @@ public class Autor extends Usuario{
 			} while (menu_autor!=2);
 		}	
 		
-	public void VerEstadoPropuesta() {
-		
-	}
+    public static void VerEstadoPropuesta(int idAutor) {
+        List<String> estados = DTO_estado_propuesta.obtenerEstadosPorAutor(idAutor);
+        if (estados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay propuestas registradas para este autor.");
+            return;
+        }
+        StringBuilder sb = new StringBuilder("ESTADO DE TUS PROPUESTAS:\n\n");
+        for (String e : estados) {
+            sb.append(e).append('\n');
+        }
+        JOptionPane.showMessageDialog(null, sb.toString(), "Estados de Propuestas", JOptionPane.INFORMATION_MESSAGE);
+    }
 	@Override
 	public String toString() {
 		return "Autor [biografia=" + biografia + ", redes_sociales=" + redes_sociales + "]";
