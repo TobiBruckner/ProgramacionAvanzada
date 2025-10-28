@@ -4,8 +4,10 @@ import javax.swing.JOptionPane;
 
 import dll.DTO_autor;
 import dll.DTO_editor;
+import dll.DTO_propuesta;
 import repository.Validaciones;
 import repository.opciones_editor;
+import java.util.List;
 
 public class Editor extends Usuario{
 	//ATRIBUTOS
@@ -60,8 +62,19 @@ public class Editor extends Usuario{
 		return DTO_editor.agregarEditor(nuevo);
 	}
 
-	public void VerPropuesta() {
+	public static void VerPropuesta() {
+		List<String> propuestas = DTO_propuesta.obtenerPropuestasConAutor();
 		
+		if (propuestas.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "No hay propuestas registradas.");
+		} else {
+			StringBuilder mensaje = new StringBuilder("PROPUESTAS REGISTRADAS:\n\n");
+			for (String propuesta : propuestas) {
+				mensaje.append(propuesta).append("\n");
+			}
+			
+			JOptionPane.showMessageDialog(null, mensaje.toString(), "Propuestas", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	public void EstimacionGanancia() {
 		

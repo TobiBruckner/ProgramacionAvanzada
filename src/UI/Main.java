@@ -72,7 +72,7 @@ public static void menu_editor() {
 		
 		switch (menu_editor) {
 		case 0:
-			JOptionPane.showMessageDialog(null, "Ver propuestas");
+			Editor.VerPropuesta();
 			break;
 
         case 1:

@@ -2,6 +2,6 @@ package repository;
 
 public enum opciones_autor {
 	
-	enviar_propuesta,cargar_informacion,ver_estado_propuesta,salir;
+	enviar_propuesta,ver_estado_propuesta,salir;
 
 }

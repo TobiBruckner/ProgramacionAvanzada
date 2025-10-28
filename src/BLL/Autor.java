@@ -35,6 +35,7 @@ public class Autor extends Usuario{
 
 
 	}
+	
 
 	//getters y setters
 	public String getBiografia() {
@@ -87,10 +88,10 @@ public class Autor extends Usuario{
 		
 		public static boolean AgregarPropuesta() {
 			String nombre = Validaciones.ValidarString("Ingrese nombre de propuesta");
-			int cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de capitulos")); 
-			int cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de paginas")); 
-			String capitulo_piloto = Validaciones.ValidarString("ingrese su capitulo piloto");
-			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id"));
+			int cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de capitulos")); 
+			int cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de paginas")); 
+			String capitulo_piloto = Validaciones.ValidarString("Ingrese su capitulo piloto");
+			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese id"));
 			
 			
 			Propuesta nuevo = new Propuesta(nombre,cantidad_capitulos,cantidad_paginas,capitulo_piloto,fk_autor);
@@ -118,16 +119,11 @@ public class Autor extends Usuario{
 				case 0:
 					Autor.AgregarPropuesta();
 		        case 1:
-					JOptionPane.showInputDialog("Cargar informacion");
+		        	JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
 
 					break;
 
 		        case 2:
-		        	
-		            JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
-			
-			         break;
-		        case 3:
 		        	JOptionPane.showMessageDialog(null, "Saliendo");
 			
 		              break;
@@ -135,15 +131,9 @@ public class Autor extends Usuario{
 
 				
 				}
-			} while (menu_autor!=3);
+			} while (menu_autor!=2);
 		}	
 		
-	public void CargarInfo() {
-		
-	}
-	public void EnviarPropuesta() {
-		
-	}
 	public void VerEstadoPropuesta() {
 		
 	}
