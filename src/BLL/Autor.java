@@ -3,6 +3,7 @@ package BLL;
 import javax.swing.JOptionPane;
 
 import dll.DTO_autor;
+import dll.DTO_propuesta;
 import repository.Validaciones;
 import repository.opciones_autor;
 
@@ -16,8 +17,8 @@ public class Autor extends Usuario{
 	//constructores
 
 
-	public Autor(String nombre, String apellido, String dni, String nombre_usuario, String pass, String biografia,
-			String redes_sociales,int id_autor,int fk_estado_propuesta) {
+	public Autor(int id_autor,String nombre, String apellido, String dni, String pass, String biografia,
+			String redes_sociales,int fk_estado_propuesta,String nombre_usuario) {
 		super(nombre, apellido, dni, nombre_usuario, pass);
 		this.biografia = biografia;
 		this.redes_sociales = redes_sociales;
@@ -33,11 +34,6 @@ public class Autor extends Usuario{
 		this.redes_sociales = redes_sociales;
 
 
-	}
-
-	public Autor(int id_autor, String apellido, String dni, String nombre_usuario, String pass, String nombre) {
-		super(nombre, apellido, dni, nombre_usuario, pass);
-		this.id_autor = id_autor;
 	}
 
 	//getters y setters
@@ -88,6 +84,59 @@ public class Autor extends Usuario{
 			
 			return DTO_autor.agregarAutor(nuevo);
 		}
+		
+		public static boolean AgregarPropuesta() {
+			String nombre = Validaciones.ValidarString("Ingrese nombre de propuesta");
+			int cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de capitulos")); 
+			int cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de paginas")); 
+			String capitulo_piloto = Validaciones.ValidarString("ingrese su capitulo piloto");
+			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id"));
+			
+			
+			Propuesta nuevo = new Propuesta(nombre,cantidad_capitulos,cantidad_paginas,capitulo_piloto,fk_autor);
+			
+			return DTO_propuesta.agregar_propuesta(nuevo);
+		}
+		
+	
+		public static void menu_autor() {
+			
+			
+			//opciones_empleado elegido = (opciones_empleado)JOptionPane.showInputDialog(null,"",""
+					//,0,null,
+					//opciones_empleado.values(),opciones_empleado.values()[0]);
+			
+			
+			int menu_autor;
+			
+			do {
+				menu_autor = JOptionPane.showOptionDialog(null,"Menú autor","¿Qué desea realizar?"
+						,0,0,null,
+						opciones_autor.values(),opciones_autor.values()[0]);
+				
+				switch (menu_autor) {
+				case 0:
+					Autor.AgregarPropuesta();
+		        case 1:
+					JOptionPane.showInputDialog("Cargar informacion");
+
+					break;
+
+		        case 2:
+		        	
+		            JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
+			
+			         break;
+		        case 3:
+		        	JOptionPane.showMessageDialog(null, "Saliendo");
+			
+		              break;
+
+
+				
+				}
+			} while (menu_autor!=3);
+		}	
 		
 	public void CargarInfo() {
 		

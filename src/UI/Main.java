@@ -53,45 +53,7 @@ public static void menu_empleado() {
 	} while (menu_empleado!=2);
 }
 
-public static void menu_autor() {
-	
-	
-	//opciones_empleado elegido = (opciones_empleado)JOptionPane.showInputDialog(null,"",""
-			//,0,null,
-			//opciones_empleado.values(),opciones_empleado.values()[0]);
-	
-	
-	int menu_autor;
-	
-	do {
-		menu_autor = JOptionPane.showOptionDialog(null,"Menú autor","¿Qué desea realizar?"
-				,0,0,null,
-				opciones_autor.values(),opciones_autor.values()[0]);
-		
-		switch (menu_autor) {
-		case 0:
-			JOptionPane.showInputDialog("Enviar propuesta");
-			break;
-        case 1:
-			JOptionPane.showInputDialog("Cargar informacion");
 
-			break;
-
-        case 2:
-        	
-            JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
-	
-	         break;
-        case 3:
-        	JOptionPane.showMessageDialog(null, "Saliendo");
-	
-              break;
-
-
-		
-		}
-	} while (menu_autor!=3);
-}
 public static void menu_editor() {
 	
 	
@@ -152,7 +114,7 @@ do {
 				Editor editor = Editor.Login_editor();
 				if(editor != null) {
 					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-					menu_empleado();
+					menu_editor();
 				}else {
 					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
 				}
@@ -161,7 +123,7 @@ do {
 				Autor autor = Autor.Login_autor();
 				if(autor != null) {
 					JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-					menu_empleado();
+					Autor.menu_autor();
 				}else {
 					JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
 				}
@@ -178,17 +140,17 @@ do {
 			case empleado:
 				agregado = Empleado.AgregarEmpleado();
 				JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
-				menu_empleado();
+				
 				break;
 			case editor:
 				agregado = Editor.AgregarEditor();
 				JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
-				menu_editor();
+				
 				break;
 			case autor:
 				agregado = Autor.AgregarAutor();
 				JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
-				menu_autor();
+				
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");

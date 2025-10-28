@@ -3,12 +3,14 @@ package dll;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import BLL.Autor;
+import BLL.Usuario;
 import dll.Conexion;
 import repository.Encriptador;
 
@@ -35,7 +37,7 @@ public class DTO_autor {
                 String biografia = rs.getString("biografia");
                 String redes_sociales = rs.getString("redes_sociales");
 
-                 autor = new Autor(id_autor,nombre,apellido,dni,nombre_usuario,pass);
+                 autor = new Autor(id_autor,nombre,apellido,dni,nombre_usuario,pass, redes_sociales, id_autor, redes_sociales);
                 }
        
         } catch (Exception e) {
@@ -76,4 +78,30 @@ public class DTO_autor {
         return false;
     }
 	
+//ver autores
+	public static LinkedList<Autor> mostrarAutores() {
+		LinkedList<Autor> autores = new LinkedList<>();
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM autores");
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				String apellido = rs.getString("apellido");
+				String dni = rs.getString("dni");
+				String password = rs.getString("pass");
+				String biografia = rs.getString("biografia");
+				String redes_sociales = rs.getString("redes_sociales");
+				int fk_estado_propuesta = rs.getInt("fk_estado_propuesta");
+				String nombre_usuario = rs.getString("nombre_usuario");
+				autores.add(new Autor(id, nombre,apellido,dni,password,biografia,redes_sociales,fk_estado_propuesta,nombre_usuario));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return autores;
+	}
+		
 }
