@@ -108,12 +108,19 @@ public class Autor extends Usuario{
 			String apellido = Validaciones.ValidarString("Ingrese apellido:");
 			String dni = Validaciones.ValidarString("Ingrese DNI:");
 			String pass = Validaciones.ValidarString("Ingrese contraseña:");
+<<<<<<< Updated upstream
 			String biografia = Validaciones.ValidarString("Ingrese biografia:");
 			String redes_sociales = Validaciones.ValidarString("Ingrese redes sociales:");
 			String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
 			
 			Autor nuevo = new Autor(nombre,apellido,dni,pass,biografia,redes_sociales,nombre_usuario);
 			
+=======
+			
+			
+			Autor nuevo = new Autor(nombre,apellido,dni,nombre_usuario,pass);
+			
+>>>>>>> Stashed changes
 			return DTO_autor.agregarAutor_dto(nuevo);
 		}
 		
@@ -169,7 +176,11 @@ public class Autor extends Usuario{
 				case 0:
 					Autor.AgregarPropuesta();
 		        case 1:
+<<<<<<< Updated upstream
 		        	JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
+=======
+					Autor.CargarInfo();
+>>>>>>> Stashed changes
 
 					break;
 
@@ -188,7 +199,18 @@ public class Autor extends Usuario{
 			} while (menu_autor!=2);
 		}	
 	
+<<<<<<< Updated upstream
 	
+=======
+		//cargar info
+	public static boolean CargarInfo() {
+		String biografia = Validaciones.ValidarString("Ingrese biografia");
+		String redes_sociales = Validaciones.ValidarString("Ingrese rdes sociales");
+		
+		return DTO_autor.cargar_info_dto(biografia, redes_sociales);
+		
+	}
+>>>>>>> Stashed changes
 	public void EnviarPropuesta() {
 		
 	}
