@@ -35,6 +35,16 @@ public class Autor extends Usuario{
 
 
 	}
+	
+	public Autor(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+		
+
+
+	}	
+	
+	
+	
 
 	//getters y setters
 	public String getBiografia() {
@@ -52,8 +62,29 @@ public class Autor extends Usuario{
 	public void setRedes_sociales(String redes_sociales) {
 		this.redes_sociales = redes_sociales;
 	}
+	
+	public int getId_autor() {
+		return id_autor;
+	}
+
+	public void setId_autor(int id_autor) {
+		this.id_autor = id_autor;
+	}
+
+	public int getFk_estado_propuesta() {
+		return fk_estado_propuesta;
+	}
+
+	public void setFk_estado_propuesta(int fk_estado_propuesta) {
+		this.fk_estado_propuesta = fk_estado_propuesta;
+	}
+	
 
 	//MÉTODOS
+	
+
+
+		//login_autor
 		public static Autor Login_autor() {
 			String nombre_usuario;
 			String pass;
@@ -71,31 +102,51 @@ public class Autor extends Usuario{
 			}
 		}
 		
+		//agregar autor
 		public static boolean AgregarAutor() {
 			String nombre = Validaciones.ValidarString("Ingrese nombre:");
 			String apellido = Validaciones.ValidarString("Ingrese apellido:");
 			String dni = Validaciones.ValidarString("Ingrese DNI:");
-			String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
 			String pass = Validaciones.ValidarString("Ingrese contraseña:");
-			String biografia = Validaciones.ValidarString("Ingrese biografía:");
+			String biografia = Validaciones.ValidarString("Ingrese biografia:");
 			String redes_sociales = Validaciones.ValidarString("Ingrese redes sociales:");
+			String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
 			
-			Autor nuevo = new Autor(nombre,apellido,dni,nombre_usuario,pass,biografia,redes_sociales);
+			Autor nuevo = new Autor(nombre,apellido,dni,pass,biografia,redes_sociales,nombre_usuario);
 			
-			return DTO_autor.agregarAutor(nuevo);
+			return DTO_autor.agregarAutor_dto(nuevo);
 		}
 		
-		public static boolean AgregarPropuesta() {
+		//agregar propuesta
+		public  static boolean AgregarPropuesta() {
 			String nombre = Validaciones.ValidarString("Ingrese nombre de propuesta");
-			int cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de capitulos")); 
-			int cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de paginas")); 
+			int cantidad_capitulos;
+			do {
+				 cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de capitulos")); 
+			} while (cantidad_capitulos<=0);
+			
+			int cantidad_paginas ;
+			do {
+				 cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de paginas")); 
+			} while (cantidad_paginas<=0);
+			 
 			String capitulo_piloto = Validaciones.ValidarString("ingrese su capitulo piloto");
-			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id"));
+			
+			//int fk_autor;
+			//do {
+			 //fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id de usuario " + "el suyo es: " + this.getId_autor()));
+			 //if (fk_autor!=this.getId_autor()) {
+				// JOptionPane.showMessageDialog(null, "id incorrecto,por favor ingrese su id " + "el suyo es: " + this.getId_autor());
+				
+			//}
+			//} while (fk_autor!=this.getId_autor());
+
+			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id de usuario "));
 			
 			
 			Propuesta nuevo = new Propuesta(nombre,cantidad_capitulos,cantidad_paginas,capitulo_piloto,fk_autor);
 			
-			return DTO_propuesta.agregar_propuesta(nuevo);
+			return DTO_autor.agregar_propuesta_dto(nuevo);
 		}
 		
 	
@@ -118,29 +169,26 @@ public class Autor extends Usuario{
 				case 0:
 					Autor.AgregarPropuesta();
 		        case 1:
-					JOptionPane.showInputDialog("Cargar informacion");
+		        	JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
 
 					break;
 
 		        case 2:
 		        	
-		            JOptionPane.showMessageDialog(null, "Ver estado de propuesta");
+		        	JOptionPane.showMessageDialog(null, "salir");
+
 			
-			         break;
-		        case 3:
-		        	JOptionPane.showMessageDialog(null, "Saliendo");
+			         
 			
 		              break;
 
 
 				
 				}
-			} while (menu_autor!=3);
+			} while (menu_autor!=2);
 		}	
-		
-	public void CargarInfo() {
-		
-	}
+	
+	
 	public void EnviarPropuesta() {
 		
 	}
