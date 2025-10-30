@@ -96,8 +96,22 @@ public class Autor extends Usuario{
 		
 		public static boolean AgregarPropuesta() {
 			String nombre = Validaciones.ValidarString("Ingrese nombre de propuesta");
-			int cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de capitulos")); 
-			int cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de paginas")); 
+			int cantidad_capitulos;
+			do {
+				cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de capitulos"));
+				if (cantidad_capitulos<=0) {
+					JOptionPane.showMessageDialog(null, "la cantidad de capitulos debe ser mayor 0");
+				}
+			} while (cantidad_capitulos<=0);
+			
+			int cantidad_paginas;
+			do {
+				cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de paginas"));
+				if (cantidad_paginas<=0) {
+					JOptionPane.showMessageDialog(null, "la cantidad de paginas debe ser mayor 0");
+				}
+			} while (cantidad_paginas<=0);
+
 			String capitulo_piloto = Validaciones.ValidarString("Ingrese su capitulo piloto");
 			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese id"));
 			
