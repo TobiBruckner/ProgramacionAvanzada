@@ -70,14 +70,7 @@ public class Autor extends Usuario{
 	public void setRedes_sociales(String redes_sociales) {
 		this.redes_sociales = redes_sociales;
 	}
-	
-	public int getId_autor() {
-		return id_autor;
-	}
 
-	public void setId_autor(int id_autor) {
-		this.id_autor = id_autor;
-	}
 
 	public int getFk_estado_propuesta() {
 		return fk_estado_propuesta;
@@ -115,6 +108,7 @@ public class Autor extends Usuario{
 			String nombre = Validaciones.ValidarString("Ingrese nombre:");
 			String apellido = Validaciones.ValidarString("Ingrese apellido:");
 			String dni = Validaciones.ValidarString("Ingrese DNI:");
+			String nombre_usuario = Validaciones.ValidarString("Ingrese su nombre de usuario:");
 			String pass = Validaciones.ValidarString("Ingrese contraseña:");
 			
 			

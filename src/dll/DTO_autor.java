@@ -53,11 +53,9 @@ public class DTO_autor {
 	
         try {
             PreparedStatement statement = con.prepareStatement(
-<<<<<<< Updated upstream
-                "INSERT INTO autor( nombre, apellido, dni, pass, biografia, redes_sociales,nombre_usuario) VALUES (?, ?, ?, ?, ?,?, ?)"
-=======
+
                 "INSERT INTO autor (nombre, apellido, dni, pass, nombre_usuario) VALUES (?, ?, ?, ?, ?)"
->>>>>>> Stashed changes
+
             );
             statement.setString(1, autor.getNombre());
             statement.setString(2, autor.getApellido());
@@ -96,8 +94,7 @@ public class DTO_autor {
 		            statement.setString(4, propuesta.getCapitulo_piloto());
 		            statement.setInt(5, propuesta.getIdAutor());
 		            
-		           
-<<<<<<< Updated upstream
+
 
 		            
 
@@ -118,25 +115,9 @@ public class DTO_autor {
 		    } 
 			
 
-=======
 
 		            
 
-		            int filas = statement.executeUpdate();
-		            if (filas > 0) {
-		                System.out.println("propuesta agregada correctamente.");
-		                return true;
-		            }
-		        } catch (MySQLIntegrityConstraintViolationException e) {
-		           	JOptionPane.showMessageDialog(null, "Autor con nombre de usuario ya creado");
-		            return false;
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		            return false;
-
-		        }
-		        return false;
-		    } 
 			
 
 //cargar informacion
@@ -166,6 +147,5 @@ public class DTO_autor {
 		        }
 		        return false;
 		    }	                
->>>>>>> Stashed changes
 
 }
