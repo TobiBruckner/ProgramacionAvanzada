@@ -165,7 +165,7 @@ public class Autor extends Usuario{
 				case 0:
 					Autor.AgregarPropuesta();
 		        case 1:
-					Autor.CargarInfo();
+					Autor.VerEstadoPropuesta(autor.getId_autor());
 
                     break;
 
@@ -192,12 +192,19 @@ public class Autor extends Usuario{
 		return DTO_autor.cargar_info_dto(biografia, redes_sociales);
 		
 	}
-	public void EnviarPropuesta() {
-		
-	}
-	public void VerEstadoPropuesta() {
-		
-	}
+	
+	 public static void VerEstadoPropuesta(int idAutor) {
+	        List<String> estados = DTO_estado_propuesta.obtenerEstadosPorAutor(idAutor);
+	        if (estados.isEmpty()) {
+	            JOptionPane.showMessageDialog(null, "No hay propuestas registradas para este autor.");
+	            return;
+	        }
+	        StringBuilder sb = new StringBuilder("ESTADO DE TUS PROPUESTAS:\n\n");
+	        for (String e : estados) {
+	            sb.append(e).append('\n');
+	        }
+	        JOptionPane.showMessageDialog(null, sb.toString(), "Estados de Propuestas", JOptionPane.INFORMATION_MESSAGE);
+	    }
 	@Override
 	public String toString() {
 		return "Autor [biografia=" + biografia + ", redes_sociales=" + redes_sociales + "]";
