@@ -54,14 +54,18 @@ public class DTO_autor {
         try {
             PreparedStatement statement = con.prepareStatement(
 
-                "INSERT INTO autor (nombre, apellido, dni, pass, nombre_usuario) VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO autor (nombre, apellido, dni, pass, biografia, redes_sociales,nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)"
 
             );
             statement.setString(1, autor.getNombre());
             statement.setString(2, autor.getApellido());
             statement.setString(3, autor.getDni());
             statement.setString(4, Encriptador.encriptar(autor.getPass()));
-            statement.setString(5, autor.getNombre_usuario());
+            statement.setString(5, autor.getBiografia());
+            statement.setString(6, autor.getRedes_sociales());
+            statement.setString(7, autor.getNombre_usuario());
+
+
 
             
 
@@ -119,33 +123,5 @@ public class DTO_autor {
 		            
 
 			
-
-//cargar informacion
-			public static boolean cargar_info_dto(String biografia,String redes_sociales) {
-				
-		       
-				try {
-		            PreparedStatement stmt = con.prepareStatement(
-		            	"INSERT INTO autor(biografia, redes_sociales) VALUES (?,?)"		            );
-		            stmt.setString(1, biografia);
-		            stmt.setString(2, redes_sociales);
-		            //executequery se utiliza cuando no hay cambios en la bdd
-		            ResultSet rs = stmt.executeQuery();
-
-		            if (rs.next()) {
-		                int id_autor = rs.getInt("id_autor");
-		                String nombre = rs.getString("nombre");
-		                String apellido = rs.getString("apellido");
-		                String dni = rs.getString("dni");
-		               
-
-		                
-		                }
-		       
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-		        return false;
-		    }	                
 
 }

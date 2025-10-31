@@ -110,9 +110,11 @@ public class Autor extends Usuario{
 			String dni = Validaciones.ValidarString("Ingrese DNI:");
 			String nombre_usuario = Validaciones.ValidarString("Ingrese su nombre de usuario:");
 			String pass = Validaciones.ValidarString("Ingrese contraseña:");
+			String biografia = Validaciones.ValidarString("Ingrese su biografía:");
+			String redes_sociales = Validaciones.ValidarString("Ingrese sus redes sociales:");
 			
 			
-			Autor nuevo = new Autor(nombre,apellido,dni,nombre_usuario,pass);
+			Autor nuevo = new Autor(nombre,apellido,dni,nombre_usuario,pass,biografia,redes_sociales);
 			
 			return DTO_autor.agregarAutor_dto(nuevo);
 		}
@@ -184,14 +186,6 @@ public class Autor extends Usuario{
 			} while (menu_autor!=2);
 		}	
 	
-		//cargar info
-	public static boolean CargarInfo() {
-		String biografia = Validaciones.ValidarString("Ingrese biografia");
-		String redes_sociales = Validaciones.ValidarString("Ingrese rdes sociales");
-		
-		return DTO_autor.cargar_info_dto(biografia, redes_sociales);
-		
-	}
 	
 	 public static void VerEstadoPropuesta(int idAutor) {
 	        List<String> estados = DTO_estado_propuesta.obtenerEstadosPorAutor(idAutor);
