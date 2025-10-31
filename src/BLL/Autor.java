@@ -90,6 +90,9 @@ public class Autor extends Usuario{
 			String redes_sociales = Validaciones.ValidarString("Ingrese redes sociales:");
 			
 			Autor nuevo = new Autor(nombre,apellido,dni,nombre_usuario,pass,biografia,redes_sociales);
+	
+
+
 			
 			return DTO_autor.agregarAutor(nuevo);
 		}
@@ -141,6 +144,7 @@ public class Autor extends Usuario{
 				}
 			} while (menu_autor!=2);
 		}	
+  
 		
     public static void VerEstadoPropuesta(int idAutor) {
         List<String> estados = DTO_estado_propuesta.obtenerEstadosPorAutor(idAutor);
