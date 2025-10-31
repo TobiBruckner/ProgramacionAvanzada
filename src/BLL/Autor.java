@@ -128,26 +128,22 @@ public class Autor extends Usuario{
 			String nombre = Validaciones.ValidarString("Ingrese nombre de propuesta");
 			int cantidad_capitulos;
 			do {
-				 cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de capitulos")); 
+				cantidad_capitulos = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de capitulos"));
+				if (cantidad_capitulos<=0) {
+					JOptionPane.showMessageDialog(null, "la cantidad de capitulos debe ser mayor 0");
+				}
 			} while (cantidad_capitulos<=0);
 			
-			int cantidad_paginas ;
+			int cantidad_paginas;
 			do {
-				 cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad de paginas")); 
+				cantidad_paginas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad de paginas"));
+				if (cantidad_paginas<=0) {
+					JOptionPane.showMessageDialog(null, "la cantidad de paginas debe ser mayor 0");
+				}
 			} while (cantidad_paginas<=0);
-			 
-			String capitulo_piloto = Validaciones.ValidarString("ingrese su capitulo piloto");
-			
-			//int fk_autor;
-			//do {
-			 //fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id de usuario " + "el suyo es: " + this.getId_autor()));
-			 //if (fk_autor!=this.getId_autor()) {
-				// JOptionPane.showMessageDialog(null, "id incorrecto,por favor ingrese su id " + "el suyo es: " + this.getId_autor());
-				
-			//}
-			//} while (fk_autor!=this.getId_autor());
 
-			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("ingrese id de usuario "));
+			String capitulo_piloto = Validaciones.ValidarString("Ingrese su capitulo piloto");
+			int fk_autor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese id"));
 			
 			
 			Propuesta nuevo = new Propuesta(nombre,cantidad_capitulos,cantidad_paginas,capitulo_piloto,fk_autor);
