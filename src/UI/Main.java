@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import BLL.Autor;
 import BLL.Editor;
 import BLL.Empleado;
+import BLL.Libro;
 import BLL.Usuario;
 import dll.Conexion;
 import dll.DTO_empleado;
@@ -41,16 +42,20 @@ public static void menu_empleado() {
 			break;
 			
         case 1:
-			JOptionPane.showInputDialog("Cambiar precio de libro");
+			Libro.AgregarLibro();
 			break;
 			
         case 2:
-	JOptionPane.showMessageDialog(null, "Salir");
+        	JOptionPane.showMessageDialog(null, "Modificar precio");
 	break;
+	    
+        case 3:
+        	JOptionPane.showMessageDialog(null, "Salir");
+        	break;
 
 		
 		}
-	} while (menu_empleado!=2);
+	} while (menu_empleado!=3);
 }
 
 
