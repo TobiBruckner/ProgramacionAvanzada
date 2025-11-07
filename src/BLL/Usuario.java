@@ -12,6 +12,7 @@ public class Usuario {
 	private String dni;
 	private String nombre_usuario;
 	private String pass;
+	private byte[] fotoPerfil;
 
 	//constructor
 	public Usuario(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
@@ -27,7 +28,18 @@ public class Usuario {
 		this.nombre_usuario = nombre_usuario;
 		this.pass = pass;
 	}
+	
+	public Usuario(String nombre, String apellido, String dni, String nombre_usuario, String pass, byte[] fotoPerfil) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.nombre_usuario = nombre_usuario;
+		this.pass = pass;
+		this.fotoPerfil = fotoPerfil;
+	}
 
+	
 	//getters y setters
 	public String getNombre() {
 		return nombre;
@@ -68,14 +80,17 @@ public class Usuario {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	
+	public byte[] getFotoPerfil() {
+		return fotoPerfil;
+	}
+
+	public void setFotoPerfil(byte[] fotoPerfil) {
+		this.fotoPerfil = fotoPerfil;
+	}
+
 
 	//MÉTODOS
-	public String Login() {
-		return "";
-	}
-	public void Menu() {
-		
-	}
 	
 	//funciones
 	@Override
