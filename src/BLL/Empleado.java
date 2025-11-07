@@ -99,17 +99,21 @@ public class Empleado extends Usuario{
 					opciones_empleado.values(),opciones_empleado.values()[0]);
 			switch (menu_empleado) {
 			case 0:
-				JOptionPane.showMessageDialog(null, "Ver información de libro");
+				JOptionPane.showMessageDialog(null, "cargar libro");
 
 				break;
 				
 	        case 1:
-				JOptionPane.showInputDialog("Cambiar precio de libro");
+				JOptionPane.showInputDialog("ver informacion de libro");
 				break;
 				
 	        case 2:
-		JOptionPane.showMessageDialog(null, "Salir");
+		JOptionPane.showMessageDialog(null, "cambiar precio de libro");
 		break;
+		
+	        case 3:
+	    		JOptionPane.showMessageDialog(null, "Salir");
+	    		break;
 
 			
 			}
