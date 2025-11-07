@@ -183,5 +183,40 @@ public String toString() {
 			+ ", getNombre_usuario()=" + getNombre_usuario() + ", getPass()=" + getPass() + ", toString()="
 			+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 }
+
+public static void menu_editor(Editor editor) {
+	
+	
+	//opciones_empleado elegido = (opciones_empleado)JOptionPane.showInputDialog(null,"",""
+			//,0,null,
+			//opciones_empleado.values(),opciones_empleado.values()[0]);
+	
+	
+	
+	int menu_editor;
+	
+	do {
+		menu_editor = JOptionPane.showOptionDialog(null,"Menú editor","¿Qué desea realizar?"
+				,0,0,null,
+				opciones_editor.values(),opciones_editor.values()[0]);
+		
+		switch (menu_editor) {
+		case 0:
+			Editor.VerPropuesta();
+			break;
+
+        case 1:
+        	Editor.EstimacionGanancia(editor.getId_editor());
+			break;
+        case 2:
+        	JOptionPane.showMessageDialog(null, "Saliendo");
+
+	
+	         break;
+		}
+	} while (menu_editor!=2);
+	
+	
+}
 	
 }
