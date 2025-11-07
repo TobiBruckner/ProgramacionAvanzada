@@ -75,11 +75,45 @@ public class Empleado extends Usuario{
 	public void ModificarPrecio() {
 		
 	}
+	
 	@Override
 	public String toString() {
 		return "Empleado [getNombre()=" + getNombre() + ", getApellido()=" + getApellido() + ", getDni()=" + getDni()
 				+ ", getNombre_usuario()=" + getNombre_usuario() + ", getPass()=" + getPass() + ", toString()="
 				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+	}
+	
+	public static void menu_empleado(Empleado empleado) {
+		
+		
+		//opciones_empleado elegido = (opciones_empleado)JOptionPane.showInputDialog(null,"",""
+				//,0,null,
+				//opciones_empleado.values(),opciones_empleado.values()[0]);
+		
+		
+		int menu_empleado;
+		
+		do {
+			menu_empleado = JOptionPane.showOptionDialog(null,"Menú empleado","¿Qué desea realizar?"
+					,0,0,null,
+					opciones_empleado.values(),opciones_empleado.values()[0]);
+			switch (menu_empleado) {
+			case 0:
+				JOptionPane.showMessageDialog(null, "Ver información de libro");
+
+				break;
+				
+	        case 1:
+				JOptionPane.showInputDialog("Cambiar precio de libro");
+				break;
+				
+	        case 2:
+		JOptionPane.showMessageDialog(null, "Salir");
+		break;
+
+			
+			}
+		} while (menu_empleado!=2);
 	}
 	
 }
