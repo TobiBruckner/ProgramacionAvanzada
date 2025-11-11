@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import BLL.Autor;
+import BLL.Propuesta;
 import BLL.Usuario;
 import dll.Conexion;
 import repository.Encriptador;
@@ -18,6 +19,7 @@ public class DTO_autor {
 
 	private static Connection con = Conexion.getInstance().getConnection();	
 	
+	//login_dto
 	public static Autor login_dto(String nombre_usuario, String pass) {	
     	Autor autor = null;
         try {
@@ -46,11 +48,14 @@ public class DTO_autor {
         return autor;
     }
 	
-	public static boolean agregarAutor(Autor autor) {
+	//agregar_autor
+	public static boolean agregarAutor_dto(Autor autor) {
 	
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO autor (nombre, apellido, dni, pass, biografia, redes_sociales, nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)"
+
+                "INSERT INTO autor (nombre, apellido, dni, pass, biografia, redes_sociales,nombre_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)"
+
             );
             statement.setString(1, autor.getNombre());
             statement.setString(2, autor.getApellido());
@@ -59,6 +64,8 @@ public class DTO_autor {
             statement.setString(5, autor.getBiografia());
             statement.setString(6, autor.getRedes_sociales());
             statement.setString(7, autor.getNombre_usuario());
+
+
 
             
 
@@ -78,6 +85,43 @@ public class DTO_autor {
         return false;
     }
 	
+	//agregar_propuesta	
+			public static boolean agregar_propuesta_dto(Propuesta propuesta) {
+				
+		        try {
+		            PreparedStatement statement = con.prepareStatement(
+		                "INSERT INTO propuesta (nombre_propuesta, cantidad_capitulos, cantidad_paginas, capitulo_piloto,fk_autor) VALUES (?, ?, ?, ?, ?)"
+		            );
+		            statement.setString(1, propuesta.getNombre_propuesta());
+		            statement.setInt(2, propuesta.getCantidad_capitulos());
+		            statement.setInt(3, propuesta.getCantidad_paginas());
+		            statement.setString(4, propuesta.getCapitulo_piloto());
+		            statement.setInt(5, propuesta.getIdAutor());
+		            
 
-		
+
+		            
+
+		            int filas = statement.executeUpdate();
+		            if (filas > 0) {
+		                System.out.println("propuesta agregada correctamente.");
+		                return true;
+		            }
+		        } catch (MySQLIntegrityConstraintViolationException e) {
+		           	JOptionPane.showMessageDialog(null, "Autor con nombre de usuario ya creado");
+		            return false;
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            return false;
+
+		        }
+		        return false;
+		    } 
+			
+
+
+		            
+
+			
+
 }

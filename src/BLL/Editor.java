@@ -21,10 +21,17 @@ public class Editor extends Usuario{
 
 	
 
-	public Editor(int id_editor, String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+	public Editor(String nombre, String apellido, String dni, String nombre_usuario, String pass, byte[] fotoPerfil,int id_editor) {
+		super(nombre, apellido, dni, nombre_usuario, pass, fotoPerfil);
+		this.id_editor = id_editor;
+	}
+
+	public Editor(String nombre, String apellido, String dni, String nombre_usuario, String pass, int id_editor) {
 		super(nombre, apellido, dni, nombre_usuario, pass);
 		this.id_editor = id_editor;
 	}
+
+
 
 	//GETTERS Y SETTERS
 	public int getId_editor() {

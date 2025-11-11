@@ -6,8 +6,10 @@ import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
+import dll.DTO_autor;
 import dll.DTO_editor;
 import dll.DTO_empleado;
+import dll.DTO_libro;
 import repository.Encriptador;
 import repository.Validaciones;
 import repository.opciones_empleado;

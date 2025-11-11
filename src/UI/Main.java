@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import BLL.Autor;
 import BLL.Editor;
 import BLL.Empleado;
+import BLL.Libro;
 import BLL.Usuario;
 import dll.Conexion;
 import dll.DTO_empleado;

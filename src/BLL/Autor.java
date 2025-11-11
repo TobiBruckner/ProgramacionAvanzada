@@ -38,6 +38,15 @@ public class Autor extends Usuario{
 
 	}
 	
+	public Autor(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
+		super(nombre, apellido, dni, nombre_usuario, pass);
+		
+
+
+	}	
+	
+	
+	
 
 	//getters y setters
     public int getId_autor() {
@@ -62,7 +71,21 @@ public class Autor extends Usuario{
 		this.redes_sociales = redes_sociales;
 	}
 
+
+	public int getFk_estado_propuesta() {
+		return fk_estado_propuesta;
+	}
+
+	public void setFk_estado_propuesta(int fk_estado_propuesta) {
+		this.fk_estado_propuesta = fk_estado_propuesta;
+	}
+	
+
 	//MÉTODOS
+	
+
+
+		//login_autor
 		public static Autor Login_autor() {
 			String nombre_usuario;
 			String pass;
@@ -80,21 +103,24 @@ public class Autor extends Usuario{
 			}
 		}
 		
+		//agregar autor
 		public static boolean AgregarAutor() {
 			String nombre = Validaciones.ValidarString("Ingrese nombre:");
 			String apellido = Validaciones.ValidarString("Ingrese apellido:");
 			String dni = Validaciones.ValidarString("Ingrese DNI:");
-			String nombre_usuario = Validaciones.ValidarString("Ingrese nombre de usuario:");
+			String nombre_usuario = Validaciones.ValidarString("Ingrese su nombre de usuario:");
 			String pass = Validaciones.ValidarString("Ingrese contraseña:");
-			String biografia = Validaciones.ValidarString("Ingrese biografía:");
-			String redes_sociales = Validaciones.ValidarString("Ingrese redes sociales:");
+			String biografia = Validaciones.ValidarString("Ingrese su biografía:");
+			String redes_sociales = Validaciones.ValidarString("Ingrese sus redes sociales:");
+			
 			
 			Autor nuevo = new Autor(nombre,apellido,dni,nombre_usuario,pass,biografia,redes_sociales);
 			
-			return DTO_autor.agregarAutor(nuevo);
+			return DTO_autor.agregarAutor_dto(nuevo);
 		}
 		
-		public static boolean AgregarPropuesta() {
+		//agregar propuesta
+		public  static boolean AgregarPropuesta() {
 			String nombre = Validaciones.ValidarString("Ingrese nombre de propuesta");
 			int cantidad_capitulos;
 			do {
@@ -118,7 +144,7 @@ public class Autor extends Usuario{
 			
 			Propuesta nuevo = new Propuesta(nombre,cantidad_capitulos,cantidad_paginas,capitulo_piloto,fk_autor);
 			
-			return DTO_propuesta.agregar_propuesta(nuevo);
+			return DTO_autor.agregar_propuesta_dto(nuevo);
 		}
 		
 	
@@ -137,16 +163,20 @@ public class Autor extends Usuario{
 						,0,0,null,
 						opciones_autor.values(),opciones_autor.values()[0]);
 				
-                switch (menu_autor) {
-                case 0:
-                    Autor.AgregarPropuesta();
-                case 1:
-                    Autor.VerEstadoPropuesta(autor.getId_autor());
+				switch (menu_autor) {
+				case 0:
+					Autor.AgregarPropuesta();
+		        case 1:
+					Autor.VerEstadoPropuesta(autor.getId_autor());
 
                     break;
 
 		        case 2:
-		        	JOptionPane.showMessageDialog(null, "Saliendo");
+		        	
+		        	JOptionPane.showMessageDialog(null, "salir");
+
+			
+			         
 			
 		              break;
 
@@ -155,19 +185,20 @@ public class Autor extends Usuario{
 				}
 			} while (menu_autor!=2);
 		}	
-		
-    public static void VerEstadoPropuesta(int idAutor) {
-        List<String> estados = DTO_estado_propuesta.obtenerEstadosPorAutor(idAutor);
-        if (estados.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay propuestas registradas para este autor.");
-            return;
-        }
-        StringBuilder sb = new StringBuilder("ESTADO DE TUS PROPUESTAS:\n\n");
-        for (String e : estados) {
-            sb.append(e).append('\n');
-        }
-        JOptionPane.showMessageDialog(null, sb.toString(), "Estados de Propuestas", JOptionPane.INFORMATION_MESSAGE);
-    }
+	
+	
+	 public static void VerEstadoPropuesta(int idAutor) {
+	        List<String> estados = DTO_estado_propuesta.obtenerEstadosPorAutor(idAutor);
+	        if (estados.isEmpty()) {
+	            JOptionPane.showMessageDialog(null, "No hay propuestas registradas para este autor.");
+	            return;
+	        }
+	        StringBuilder sb = new StringBuilder("ESTADO DE TUS PROPUESTAS:\n\n");
+	        for (String e : estados) {
+	            sb.append(e).append('\n');
+	        }
+	        JOptionPane.showMessageDialog(null, sb.toString(), "Estados de Propuestas", JOptionPane.INFORMATION_MESSAGE);
+	    }
 	@Override
 	public String toString() {
 		return "Autor [biografia=" + biografia + ", redes_sociales=" + redes_sociales + "]";
