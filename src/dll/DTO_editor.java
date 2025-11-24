@@ -17,9 +17,13 @@ import repository.Encriptador;
 public class DTO_editor {
 private static Connection con = Conexion.getInstance().getConnection();	
 	
-	public static Editor login_dto(String nombre_usuario, String pass) {	
+    public static Editor login_dto(String nombre_usuario, String pass) {
     	Editor editor = null;
         try {
+            if (con == null) {
+                JOptionPane.showMessageDialog(null, "Sin conexión a la base de datos");
+                return null;
+            }
             PreparedStatement stmt = con.prepareStatement(
                 "SELECT * FROM editor WHERE nombre_usuario = ? AND pass = ?"
             );
@@ -33,13 +37,12 @@ private static Connection con = Conexion.getInstance().getConnection();
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String dni = rs.getString("dni");
-                byte[] foto_perfil = rs.getBytes("foto_perfil");
-
-                 editor = new Editor(pass,nombre,apellido,dni,nombre_usuario,foto_perfil,id_editor);
-                }
+                editor = new Editor(nombre,apellido,dni,nombre_usuario,pass,id_editor);
+            }
        
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error en login de editor: " + e.getMessage());
         }
         return editor;
     }
@@ -47,15 +50,18 @@ private static Connection con = Conexion.getInstance().getConnection();
 	public static boolean agregarEditor(Editor editor) {
 	
         try {
+            if (con == null) {
+                JOptionPane.showMessageDialog(null, "Sin conexión a la base de datos");
+                return false;
+            }
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO editor (nombre, apellido, dni, pass, nombre_usuario, foto_perfil) VALUES (?, ?, ?, ?, ?, ?)"
+                "INSERT INTO editor (nombre, apellido, dni, pass, nombre_usuario) VALUES (?, ?, ?, ?, ?)"
             );
             statement.setString(1, editor.getNombre());
             statement.setString(2, editor.getApellido());
             statement.setString(3, editor.getDni());
             statement.setString(4, Encriptador.encriptar(editor.getPass()));
             statement.setString(5, editor.getNombre_usuario());
-			statement.setBytes(6, editor.getFotoPerfil());
 
             
 
@@ -66,10 +72,11 @@ private static Connection con = Conexion.getInstance().getConnection();
                 return true;
             }
         } catch (MySQLIntegrityConstraintViolationException e) {
-           	JOptionPane.showMessageDialog(null, "Editor con nombre de usuario ya creado");
+            	JOptionPane.showMessageDialog(null, "Editor con nombre de usuario ya creado");
             return false;
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al agregar editor: " + e.getMessage());
             return false;
 
         }

@@ -14,9 +14,9 @@ import BLL.Libro;
 import repository.Encriptador;
 
 public class DTO_libro {
-	private static Connection con = Conexion.getInstance().getConnection();	
+    private static Connection con = Conexion.getInstance().getConnection(); 
 
-	public static boolean agregarLibro(Libro libro) {
+    public static boolean agregarLibro(Libro libro) {
 		
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -46,8 +46,8 @@ public class DTO_libro {
         }
         return false;
     }
-	
-	public static LinkedList<Libro> mostrarLibros() {
+
+    public static LinkedList<Libro> mostrarLibros() {
 	    LinkedList<Libro> libros = new LinkedList<>();
 	    try {
 	        PreparedStatement stmt = con.prepareStatement("SELECT * FROM libro");
@@ -66,6 +66,21 @@ public class DTO_libro {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	    return libros;
-	}
+        return libros;
+    }
+
+    public static boolean actualizarPrecioLibro(int idLibro, double nuevoPrecio) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+                "UPDATE libro SET precio_libro = ? WHERE id_libro = ?"
+            );
+            statement.setDouble(1, nuevoPrecio);
+            statement.setInt(2, idLibro);
+            int filas = statement.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

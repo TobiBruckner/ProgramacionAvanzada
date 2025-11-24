@@ -32,6 +32,8 @@ public class Empleado extends Usuario{
 	public Empleado(String nombre, String apellido, String dni, String nombre_usuario, String pass) {
 		super(nombre, apellido, dni, nombre_usuario, pass);
 	}
+	
+	
 
 	//GETTERS Y SETTERS
 	public int getId_empleado() {
@@ -71,12 +73,61 @@ public class Empleado extends Usuario{
 		return DTO_empleado.agregarEmpleado(nuevo);
 	}
 
-	public void VerInformacionLibro() {
-		
-	}
-	public void ModificarPrecio() {
-		
-	}
+    public void VerInformacionLibro() {
+        java.util.LinkedList<Libro> libros = DTO_libro.mostrarLibros();
+        if (libros == null || libros.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay libros registrados");
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Libro l : libros) {
+            sb.append("ID: ").append(l.getId_libro())
+              .append(" | Nombre: ").append(l.getNombre_libro())
+              .append(" | Autor: ").append(l.getAutor_libro())
+              .append(" | Precio: $").append(l.getPrecio_libro())
+              .append(" | Stock: ").append(l.getStock())
+              .append(" | Popularidad: ").append(l.getPopularidad())
+              .append("\n");
+        }
+        JOptionPane.showMessageDialog(null, sb.toString(), "Información de Libros", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void ModificarPrecio() {
+        java.util.LinkedList<Libro> libros = DTO_libro.mostrarLibros();
+        if (libros == null || libros.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay libros registrados");
+            return;
+        }
+        String idStr = JOptionPane.showInputDialog("Ingrese ID de libro a modificar");
+        if (idStr == null || idStr.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ID inválido");
+            return;
+        }
+        int id;
+        try {
+            id = Integer.parseInt(idStr.trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID debe ser numérico");
+            return;
+        }
+        String precioStr = JOptionPane.showInputDialog("Ingrese nuevo precio");
+        if (precioStr == null || precioStr.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Precio inválido");
+            return;
+        }
+        double nuevoPrecio;
+        try {
+            nuevoPrecio = Double.parseDouble(precioStr.trim());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Precio debe ser numérico");
+            return;
+        }
+        if (nuevoPrecio <= 0) {
+            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0");
+            return;
+        }
+        boolean ok = DTO_libro.actualizarPrecioLibro(id, nuevoPrecio);
+        JOptionPane.showMessageDialog(null, ok ? "Precio actualizado" : "No se pudo actualizar el precio");
+    }
 	
 	@Override
 	public String toString() {
@@ -95,27 +146,26 @@ public class Empleado extends Usuario{
 		
 		int menu_empleado;
 		
-		do {
-			menu_empleado = JOptionPane.showOptionDialog(null,"Menú empleado","¿Qué desea realizar?"
-					,0,0,null,
-					opciones_empleado.values(),opciones_empleado.values()[0]);
-			switch (menu_empleado) {
-			case 0:
-				JOptionPane.showMessageDialog(null, "Ver información de libro");
-
-				break;
-				
-	        case 1:
-				JOptionPane.showInputDialog("Cambiar precio de libro");
-				break;
-				
-	        case 2:
-		JOptionPane.showMessageDialog(null, "Salir");
-		break;
-
-			
-			}
-		} while (menu_empleado!=2);
+        do {
+            menu_empleado = JOptionPane.showOptionDialog(null,"Menú empleado","¿Qué desea realizar?"
+                    ,0,0,null,
+                    opciones_empleado.values(),opciones_empleado.values()[0]);
+            switch (menu_empleado) {
+            case 0:
+                empleado.VerInformacionLibro();
+                break;
+            case 1:
+                boolean ok = Libro.AgregarLibro();
+                JOptionPane.showMessageDialog(null, ok ? "Libro agregado correctamente" : "No se pudo agregar el libro");
+                break;
+            case 2:
+                empleado.ModificarPrecio();
+                break;
+            case 3:
+                JOptionPane.showMessageDialog(null, "Salir");
+                break;
+            }
+        } while (menu_empleado!=3);
 	}
 	
 }
