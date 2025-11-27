@@ -17,8 +17,8 @@ import repository.opciones_empleado;
 
 public class Main {
 public static void main(String[] args) {
-	Conexion.getInstance();
-	Usuario.usuarios();
+    Conexion.getInstance();
+    Usuario.usuarios();
 }
 
 

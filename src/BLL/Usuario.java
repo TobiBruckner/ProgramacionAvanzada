@@ -1,6 +1,8 @@
 package BLL;
 
 import javax.swing.JOptionPane;
+import UI.EditorLoginFrame;
+import UI.EditorRegisterFrame;
 
 import repository.login_usuarios;
 import repository.usuarios_tipos;
@@ -111,7 +113,7 @@ public class Usuario {
 
 		case 1:
 			login(usuarios_tipos.editor);
-			break;
+			return;
 			
 		case 2:
 			login(usuarios_tipos.autor);
@@ -148,23 +150,17 @@ public class Usuario {
 						}
 						break;
 					case editor:
-						Editor editor = Editor.Login_editor();
-						if(editor != null) {
-							JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-							Editor.menu_editor(editor);
-						}else {
-							JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
-						}
-						break;
-		            case autor:
-		                Autor autor = Autor.Login_autor();
-		                if(autor != null) {
-		                    JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
-		                    Autor.menu_autor(autor);
-		                }else {
-		                    JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
-		                }
-		                break;
+						new EditorLoginFrame().setVisible(true);
+						return;
+				    case autor:
+				        Autor autor = Autor.Login_autor();
+				        if(autor != null) {
+				            JOptionPane.showMessageDialog(null, "Inicio de sesión correcto");
+				            Autor.menu_autor(autor);
+				        }else {
+				            JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrectos");
+				        }
+				        break;
 					default:
 						JOptionPane.showMessageDialog(null, "Seleccione un tipo de usuario válido.");
 						break;
@@ -180,10 +176,8 @@ public class Usuario {
 						
 						break;
 					case editor:
-						agregado = Editor.AgregarEditor();
-						JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
-						
-						break;
+						new EditorRegisterFrame().setVisible(true);
+						return;
 					case autor:
 						agregado = Autor.AgregarAutor();
 						JOptionPane.showMessageDialog(null, agregado ? "Agregado correctamente" : "No se pudo agregar");
