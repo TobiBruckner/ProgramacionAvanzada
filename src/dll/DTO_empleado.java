@@ -31,7 +31,7 @@ private static Connection con = Conexion.getInstance().getConnection();
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String dni = rs.getString("dni");
-                byte[] foto_perfil = rs.getBytes("foto_perfil");
+               
 
 
                  empleado = new Empleado(id_empleado,nombre,apellido,dni,nombre_usuario,pass);
@@ -47,18 +47,14 @@ private static Connection con = Conexion.getInstance().getConnection();
 	
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO empleado (nombre, apellido, dni, pass, nombre_usuario, foto_perfil) VALUES (?, ?, ?, ?, ?, ?)"
+                "INSERT INTO empleado (nombre, apellido, dni, pass, nombre_usuario) VALUES (?, ?, ?, ?, ?)"
             );
             statement.setString(1, empleado.getNombre());
             statement.setString(2, empleado.getApellido());
             statement.setString(3, empleado.getDni());
             statement.setString(4, Encriptador.encriptar(empleado.getPass()));
             statement.setString(5, empleado.getNombre_usuario());
-            byte[] foto = empleado.getFotoPerfil();
-            if (foto == null) {
-                foto = new byte[0];
-            }
-            statement.setBytes(6, foto);
+           
             
             int filas = statement.executeUpdate();
             if (filas > 0) {
