@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BLL.Editor;
 import BLL.Empleado;
 
 import javax.swing.JLabel;
@@ -54,11 +55,13 @@ public class menuempleadoJFrame extends JFrame {
 		JButton btnverlibro = new JButton("ver libro");
 		btnverlibro.setBounds(31, 183, 156, 23);
 		contentPane.add(btnverlibro);
+		btnverlibro.addActionListener(e -> Empleado.VerInformacionLibro());
 		
 		JButton precio = new JButton("modificar precio");
 		precio.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		precio.setBounds(229, 183, 156, 23);
 		contentPane.add(precio);
+		precio.addActionListener(e -> Empleado.ModificarPrecio());
 		
 		JButton btnsalir = new JButton("salir");
 		btnsalir.addActionListener(new ActionListener() {

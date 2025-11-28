@@ -73,7 +73,7 @@ public class Empleado extends Usuario{
 		return DTO_empleado.agregarEmpleado(nuevo);
 	}
 
-    public void VerInformacionLibro() {
+    public static void VerInformacionLibro() {
         java.util.LinkedList<Libro> libros = DTO_libro.mostrarLibros();
         if (libros == null || libros.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay libros registrados");
@@ -91,7 +91,7 @@ public class Empleado extends Usuario{
         }
         JOptionPane.showMessageDialog(null, sb.toString(), "Información de Libros", JOptionPane.INFORMATION_MESSAGE);
     }
-    public void ModificarPrecio() {
+    public static void ModificarPrecio() {
         java.util.LinkedList<Libro> libros = DTO_libro.mostrarLibros();
         if (libros == null || libros.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay libros registrados");
