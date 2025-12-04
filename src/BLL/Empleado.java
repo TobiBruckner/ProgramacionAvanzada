@@ -13,6 +13,8 @@ import dll.DTO_libro;
 import repository.Encriptador;
 import repository.Validaciones;
 import repository.opciones_empleado;
+import UI.LibrosFrame;
+import UI.LibrosPrecioFrame;
 
 public class Empleado extends Usuario{
 	//ATRIBUTOS
@@ -74,59 +76,10 @@ public class Empleado extends Usuario{
 	}
 
     public static void VerInformacionLibro() {
-        java.util.LinkedList<Libro> libros = DTO_libro.mostrarLibros();
-        if (libros == null || libros.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay libros registrados");
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        for (Libro l : libros) {
-            sb.append("ID: ").append(l.getId_libro())
-              .append(" | Nombre: ").append(l.getNombre_libro())
-              .append(" | Autor: ").append(l.getAutor_libro())
-              .append(" | Precio: $").append(l.getPrecio_libro())
-              .append(" | Stock: ").append(l.getStock())
-              .append(" | Popularidad: ").append(l.getPopularidad())
-              .append("\n");
-        }
-        JOptionPane.showMessageDialog(null, sb.toString(), "Información de Libros", JOptionPane.INFORMATION_MESSAGE);
+        new LibrosFrame().setVisible(true);
     }
     public static void ModificarPrecio() {
-        java.util.LinkedList<Libro> libros = DTO_libro.mostrarLibros();
-        if (libros == null || libros.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No hay libros registrados");
-            return;
-        }
-        String idStr = JOptionPane.showInputDialog("Ingrese ID de libro a modificar");
-        if (idStr == null || idStr.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ID inválido");
-            return;
-        }
-        int id;
-        try {
-            id = Integer.parseInt(idStr.trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "ID debe ser numérico");
-            return;
-        }
-        String precioStr = JOptionPane.showInputDialog("Ingrese nuevo precio");
-        if (precioStr == null || precioStr.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Precio inválido");
-            return;
-        }
-        double nuevoPrecio;
-        try {
-            nuevoPrecio = Double.parseDouble(precioStr.trim());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Precio debe ser numérico");
-            return;
-        }
-        if (nuevoPrecio <= 0) {
-            JOptionPane.showMessageDialog(null, "El precio debe ser mayor a 0");
-            return;
-        }
-        boolean ok = DTO_libro.actualizarPrecioLibro(id, nuevoPrecio);
-        JOptionPane.showMessageDialog(null, ok ? "Precio actualizado" : "No se pudo actualizar el precio");
+        new LibrosPrecioFrame().setVisible(true);
     }
 	
 	@Override

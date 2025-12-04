@@ -23,8 +23,8 @@ public class EditorMenuFrame extends JFrame {
         panel.add(proyectar);
         panel.add(salir);
         add(panel, BorderLayout.CENTER);
-        ver.addActionListener(e -> Editor.VerPropuesta());
-        proyectar.addActionListener(e -> Editor.EstimacionGanancia(editor.getId_editor()));
+        ver.addActionListener(e -> new PropuestasRecibidasFrame(editor).setVisible(true));
+        proyectar.addActionListener(e -> new PropuestasPendientesFrame(editor).setVisible(true));
         salir.addActionListener(e -> EditorStartFrame.start());
     }
 }
