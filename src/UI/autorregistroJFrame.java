@@ -1,23 +1,20 @@
 package UI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import BLL.Autor;
 import dll.DTO_autor;
-
-import java.awt.Color;
 
 public class autorregistroJFrame extends JFrame {
 
@@ -27,112 +24,106 @@ public class autorregistroJFrame extends JFrame {
 	private JTextField inpapellido;
 	private JTextField inpdni;
 	private JTextField inpnombreusuario;
+	private JPasswordField inppass;
 	private JTextField inpbiografia;
 	private JTextField inpredes;
-	private JPasswordField inppass;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					autorregistroJFrame frame = new autorregistroJFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				autorregistroJFrame frame = new autorregistroJFrame();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public autorregistroJFrame() {
+		setTitle("Registro de Autor - Librería Yenny");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 726);
+		setBounds(100, 100, 480, 750); 
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("registro autor");
-		lblNewLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 15));
-		lblNewLabel.setBounds(173, 28, 132, 25);
-		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("nombre");
-		lblNewLabel_1.setBounds(29, 101, 46, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lblTitulo = new JLabel("CREAR CUENTA");
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		lblTitulo.setForeground(new Color(44, 62, 80));
+		lblTitulo.setBounds(0, 20, 464, 30);
+		contentPane.add(lblTitulo);
 		
-		inpnombre = new JTextField();
-		inpnombre.setBounds(29, 126, 86, 20);
-		contentPane.add(inpnombre);
-		inpnombre.setColumns(10);
+		JLabel lblSub = new JLabel("Complete sus datos para unirse como autor");
+		lblSub.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSub.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		lblSub.setForeground(Color.GRAY);
+		lblSub.setBounds(0, 50, 464, 20);
+		contentPane.add(lblSub);
+
 		
-		inpapellido = new JTextField();
-		inpapellido.setColumns(10);
-		inpapellido.setBounds(29, 192, 86, 20);
-		contentPane.add(inpapellido);
+		int xLabel = 50;
+		int xField = 50;
+		int widthField = 360;
+		int heightField = 30;
+		int yStart = 90;
+		int gap = 55; 
+
 		
-		JLabel lblNewLabel_1_1 = new JLabel("apellido");
-		lblNewLabel_1_1.setBounds(29, 167, 46, 14);
-		contentPane.add(lblNewLabel_1_1);
+		agregarEtiqueta("Nombre:", xLabel, yStart);
+		inpnombre = agregarTextField(xField, yStart + 20, widthField, heightField);
+
 		
-		inpdni = new JTextField();
-		inpdni.setColumns(10);
-		inpdni.setBounds(29, 267, 86, 20);
-		contentPane.add(inpdni);
+		agregarEtiqueta("Apellido:", xLabel, yStart + gap);
+		inpapellido = agregarTextField(xField, yStart + gap + 20, widthField, heightField);
+
 		
-		JLabel lblNewLabel_1_2 = new JLabel("dni");
-		lblNewLabel_1_2.setBounds(29, 242, 46, 14);
-		contentPane.add(lblNewLabel_1_2);
+		agregarEtiqueta("DNI:", xLabel, yStart + gap * 2);
+		inpdni = agregarTextField(xField, yStart + gap * 2 + 20, widthField, heightField);
+
 		
-		inpnombreusuario = new JTextField();
-		inpnombreusuario.setColumns(10);
-		inpnombreusuario.setBounds(29, 343, 86, 20);
-		contentPane.add(inpnombreusuario);
+		agregarEtiqueta("Nombre de Usuario:", xLabel, yStart + gap * 3);
+		inpnombreusuario = agregarTextField(xField, yStart + gap * 3 + 20, widthField, heightField);
+
 		
-		JLabel lblNewLabel_1_3 = new JLabel("nombre_usuario");
-		lblNewLabel_1_3.setBounds(29, 318, 86, 14);
-		contentPane.add(lblNewLabel_1_3);
-		
-		JLabel lblNewLabel_1_4 = new JLabel("contaseña");
-		lblNewLabel_1_4.setBounds(29, 396, 86, 14);
-		contentPane.add(lblNewLabel_1_4);
-		
-		inpbiografia = new JTextField();
-		inpbiografia.setColumns(10);
-		inpbiografia.setBounds(29, 477, 86, 20);
-		contentPane.add(inpbiografia);
-		
-		JLabel lblNewLabel_1_5 = new JLabel("biografia");
-		lblNewLabel_1_5.setBounds(29, 452, 46, 14);
-		contentPane.add(lblNewLabel_1_5);
-		
-		inpredes = new JTextField();
-		inpredes.setColumns(10);
-		inpredes.setBounds(29, 548, 86, 20);
-		contentPane.add(inpredes);
-		
-		JLabel lblNewLabel_1_6 = new JLabel("redes sociales");
-		lblNewLabel_1_6.setBounds(29, 523, 102, 14);
-		contentPane.add(lblNewLabel_1_6);
-		
+		agregarEtiqueta("Contraseña:", xLabel, yStart + gap * 4);
 		inppass = new JPasswordField();
-		inppass.setBounds(29, 421, 86, 20);
+		inppass.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		inppass.setBounds(xField, yStart + gap * 4 + 20, widthField, heightField);
 		contentPane.add(inppass);
+
 		
+		agregarEtiqueta("Biografía breve:", xLabel, yStart + gap * 5);
+		inpbiografia = agregarTextField(xField, yStart + gap * 5 + 20, widthField, heightField);
+
+		
+		agregarEtiqueta("Redes Sociales (Contacto):", xLabel, yStart + gap * 6);
+		inpredes = agregarTextField(xField, yStart + gap * 6 + 20, widthField, heightField);
+
+	
 		JLabel lblerror = new JLabel("");
-		lblerror.setFont(new Font("Yu Gothic", Font.PLAIN, 15));
-		lblerror.setForeground(new Color(255, 0, 0));
-		lblerror.setBounds(29, 599, 383, 14);
+		lblerror.setHorizontalAlignment(SwingConstants.CENTER);
+		lblerror.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		lblerror.setForeground(new Color(231, 76, 60));
+		lblerror.setBounds(50, 580, 360, 20);
 		contentPane.add(lblerror);
 		
-		JButton btnregistro = new JButton("registro");
-		btnregistro.addActionListener(new ActionListener() {
+		
+		
+		
+		JButton btnRegistro = new JButton("Registrar Autor");
+		btnRegistro.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		btnRegistro.setForeground(Color.WHITE);
+		btnRegistro.setBackground(new Color(39, 174, 96)); 
+		btnRegistro.setFocusPainted(false);
+		btnRegistro.setBorderPainted(false);
+		btnRegistro.setBounds(50, 610, 360, 40);
+		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String nombre = inpnombre.getText().trim();
@@ -143,31 +134,61 @@ public class autorregistroJFrame extends JFrame {
 				String biografia = inpbiografia.getText().trim();
 				String redes_sociales = inpredes.getText().trim();
 				
-				if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || nombre_usuario.isEmpty() || pass.isEmpty() || biografia.isEmpty() || redes_sociales.isEmpty()) {
-					lblerror.setText("Debe completar todos los campos.");
+				if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || 
+					nombre_usuario.isEmpty() || pass.isEmpty() || 
+					biografia.isEmpty() || redes_sociales.isEmpty()) {
+					lblerror.setText("Por favor, complete todos los campos.");
 					return; 
 				}
-				lblerror.setText("");
 				
+				lblerror.setText(""); 
 				
-				Autor autor = new Autor(nombre,apellido,dni,nombre_usuario,pass,biografia,redes_sociales);
+				Autor autor = new Autor(nombre, apellido, dni, nombre_usuario, pass, biografia, redes_sociales);
 				boolean ok = DTO_autor.agregarAutor_dto(autor);
+				
 				if (ok) {
+					
 					autorloginJFrame nuevo = new autorloginJFrame();
 					nuevo.setVisible(true);
 					dispose();					
 				} else {
-					
-					lblerror.setText("error al ingresar");
-
+					lblerror.setText("Error: No se pudo registrar. Verifique el usuario.");
 				}
 			}
 		});
-		btnregistro.setBounds(29, 624, 89, 23);
-		contentPane.add(btnregistro);
+		contentPane.add(btnRegistro);
 		
 		
-
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		btnCancelar.setForeground(Color.GRAY);
+		btnCancelar.setContentAreaFilled(false);
+		btnCancelar.setBorderPainted(false);
+		btnCancelar.setFocusPainted(false);
+		btnCancelar.setBounds(130, 660, 200, 30);
+		btnCancelar.addActionListener(e -> {
+			
+			autor_inicioJFrame inicio = new autor_inicioJFrame();
+			inicio.setVisible(true);
+			dispose();
+		});
+		contentPane.add(btnCancelar);
 	}
-
+	
+	
+	private void agregarEtiqueta(String texto, int x, int y) {
+		JLabel lbl = new JLabel(texto);
+		lbl.setFont(new Font("Segoe UI", Font.BOLD, 12));
+		lbl.setForeground(new Color(100, 100, 100));
+		lbl.setBounds(x, y, 300, 20);
+		contentPane.add(lbl);
+	}
+	
+	private JTextField agregarTextField(int x, int y, int w, int h) {
+		JTextField txt = new JTextField();
+		txt.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		txt.setBounds(x, y, w, h);
+		contentPane.add(txt);
+		return txt;
+	}
 }

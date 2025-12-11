@@ -1,103 +1,116 @@
 package UI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import BLL.Autor;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import BLL.Autor;
 
 public class menuautorJFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
 	private Autor autorActual;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					menuautorJFrame frame = new menuautorJFrame(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				menuautorJFrame frame = new menuautorJFrame(null);
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public menuautorJFrame(Autor autor) {
-		
 		this.autorActual = autor;
+		setTitle("Panel de Autor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 510, 339);
+		setBounds(100, 100, 600, 400);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(236, 240, 241));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("menu autor");
-		lblNewLabel.setFont(new Font("Yu Gothic", Font.PLAIN, 18));
-		lblNewLabel.setBounds(219, 29, 109, 57);
-		contentPane.add(lblNewLabel);
 		
-		JButton btnagregarpropuesta = new JButton("agregar propuesta");
-		btnagregarpropuesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (autorActual != null) {
-					
-					new AgregarPropuestaJFrames(autorActual);
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Debe iniciar sesión como Autor para agregar una propuesta.", "Error de Sesión", JOptionPane.ERROR_MESSAGE);
-				}
-				
-				
+		JPanel panelHeader = new JPanel();
+		panelHeader.setBackground(new Color(52, 73, 94));
+		panelHeader.setBounds(0, 0, 600, 60);
+		panelHeader.setLayout(null);
+		contentPane.add(panelHeader);
+		
+		String nombreAutor = (autor != null) ? autor.getNombre() + " " + autor.getApellido() : "Invitado";
+		JLabel lblBienvenido = new JLabel("Bienvenido, " + nombreAutor);
+		lblBienvenido.setForeground(Color.WHITE);
+		lblBienvenido.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lblBienvenido.setBounds(20, 15, 400, 30);
+		panelHeader.add(lblBienvenido);
+		
+		JLabel lblMenu = new JLabel("MENÚ PRINCIPAL");
+		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenu.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		lblMenu.setForeground(new Color(44, 62, 80));
+		lblMenu.setBounds(0, 90, 584, 30);
+		contentPane.add(lblMenu);
+		
+		
+		JButton btnPropuesta = new JButton("Nueva Propuesta");
+		btnPropuesta.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		btnPropuesta.setBackground(new Color(52, 152, 219));
+		btnPropuesta.setForeground(Color.WHITE);
+		btnPropuesta.setFocusPainted(false);
+		btnPropuesta.setBounds(100, 150, 180, 80);
+		btnPropuesta.addActionListener(e -> {
+			if (autorActual != null) {
+				new AgregarPropuestaJFrames(autorActual); 
+			} else {
+				mostrarErrorSesion();
 			}
 		});
-		btnagregarpropuesta.setBounds(65, 201, 156, 23);
-		contentPane.add(btnagregarpropuesta);
+		contentPane.add(btnPropuesta);
 		
-		JButton btnVerestadopropuesta = new JButton("ver_estado_propuesta");
-		btnVerestadopropuesta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if (autorActual != null) {
-					
-					new VerEstadoPropuestaJFrame(autorActual).setVisible(true);
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Debe iniciar sesión como Autor para ver el estado de las propuestas.", "Error de Sesión", JOptionPane.ERROR_MESSAGE);
-				}
+		
+		JButton btnEstado = new JButton("Ver Estados");
+		btnEstado.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		btnEstado.setBackground(new Color(155, 89, 182)); 
+		btnEstado.setForeground(Color.WHITE);
+		btnEstado.setFocusPainted(false);
+		btnEstado.setBounds(310, 150, 180, 80);
+		btnEstado.addActionListener(e -> {
+			if (autorActual != null) {
+				new VerEstadoPropuestaJFrame(autorActual).setVisible(true);
+			} else {
+				mostrarErrorSesion();
 			}
 		});
-		btnVerestadopropuesta.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnVerestadopropuesta.setBounds(263, 201, 156, 23);
-		contentPane.add(btnVerestadopropuesta);
+		contentPane.add(btnEstado);
 		
-		JButton btnsalir = new JButton("salir");
-		btnsalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
+		
+		JButton btnSalir = new JButton("Cerrar Sesión");
+		btnSalir.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		btnSalir.setBackground(new Color(231, 76, 60));
+		btnSalir.setForeground(Color.WHITE);
+		btnSalir.setBounds(220, 300, 150, 35);
+		btnSalir.addActionListener(e -> {
+			dispose();
+			new index().setVisible(true); 
 		});
-		btnsalir.setBounds(202, 255, 89, 23);
-		contentPane.add(btnsalir);
-
+		contentPane.add(btnSalir);
 	}
-
+	
+	private void mostrarErrorSesion() {
+		JOptionPane.showMessageDialog(contentPane, "Debe iniciar sesión.", "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }
